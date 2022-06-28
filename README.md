@@ -275,7 +275,7 @@ If we want to call an external post processing script:
  - we create a method in the controller that loops on the dict_curve (dictionnare of curved object)
  - we adapt our add script so that it includes the data of the object
  - We then create a widget in the interface that calls the method of the view's controller attribute
-if we want to add a new feature after analysis but on the object *curve :  
+if we want to add a new feature after analysis but on the object *curve :
  - we add a method to curve
  - we create a widget that calls this method through the dict-curve of the controller
 
