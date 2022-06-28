@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>otanalysis.view.toggle &mdash; OTAnalysis 0.2.72 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> OTAnalysis
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#otanalysis">OTAnalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#tool-for-managing-the-results-of-optical-tweezers">Tool for managing the results of optical tweezers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#install-miniconda-create-conda-environment">Install MiniConda &amp;&amp; Create conda environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">OTAnalysis</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">OTAnalysis</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>otanalysis.view.toggle</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for otanalysis.view.toggle</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># @author Thierry GALLIANO</span>
+<span class="c1"># @contributors Pierre-Henri PUECH, Laurent LIMOZIN, Guillaume GAY</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Plan to build a custom Toggle button</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">PyQt5.QtWidgets</span> <span class="kn">import</span> <span class="n">QCheckBox</span>
+<span class="kn">from</span> <span class="nn">PyQt5.QtCore</span> <span class="kn">import</span> <span class="n">Qt</span><span class="p">,</span> <span class="n">QRect</span><span class="p">,</span> <span class="n">QPoint</span><span class="p">,</span> <span class="n">QEasingCurve</span><span class="p">,</span> <span class="n">QPropertyAnimation</span><span class="p">,</span> <span class="n">pyqtProperty</span>
+<span class="kn">from</span> <span class="nn">PyQt5.QtGui</span> <span class="kn">import</span> <span class="n">QPainter</span><span class="p">,</span> <span class="n">QColor</span><span class="p">,</span> <span class="n">QFont</span>
+
+
+<div class="viewcode-block" id="QtToggle"><a class="viewcode-back" href="../../../otanalysis.view.html#otanalysis.view.toggle.QtToggle">[docs]</a><span class="k">class</span> <span class="nc">QtToggle</span><span class="p">(</span><span class="n">QCheckBox</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Toggle Button instantiation class in the Qt interface</span>
+
+<span class="sd">    :parameters:</span>
+<span class="sd">        QCheckBox: heritage</span>
+<span class="sd">            inheritance of the checkBox widget class</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">bg_color</span><span class="p">,</span> <span class="n">circle_color</span><span class="p">,</span>
+                 <span class="n">active_color</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">active_text</span><span class="p">,</span> <span class="n">animation_curve</span><span class="o">=</span><span class="n">QEasingCurve</span><span class="o">.</span><span class="n">OutQuint</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialization of the Toggle object</span>
+
+<span class="sd">        :parameters:</span>
+<span class="sd">            width: int</span>
+<span class="sd">                horizontal size of the button</span>
+<span class="sd">            height: int</span>
+<span class="sd">                height of the button</span>
+<span class="sd">            bg_color: str</span>
+<span class="sd">                background color when the button is in the OFF position</span>
+<span class="sd">            circle_color: str</span>
+<span class="sd">                color of the animation circle for the toggle state change</span>
+<span class="sd">            active_color: str</span>
+<span class="sd">                color when the button is in the ON position</span>
+<span class="sd">            text: str</span>
+<span class="sd">                text when the button is OFF</span>
+<span class="sd">            active_text: str</span>
+<span class="sd">                text when the button is ON</span>
+<span class="sd">            animation_curve: object</span>
+<span class="sd">                QEasingCurve.OutQuint by default</span>
+<span class="sd">                animation during the transition of the button between two states</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">QCheckBox</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="c1"># SET DEFAUT PARAMETERS</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setFixedSize</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setCursor</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">PointingHandCursor</span><span class="p">)</span>
+
+        <span class="c1"># Colors</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bg_color</span> <span class="o">=</span> <span class="n">bg_color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_circle_color</span> <span class="o">=</span> <span class="n">circle_color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_active_color</span> <span class="o">=</span> <span class="n">active_color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inactive_text</span> <span class="o">=</span> <span class="n">text</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">active_text</span> <span class="o">=</span> <span class="n">active_text</span>
+
+        <span class="c1"># CREATE ANIMATION</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_circle_position</span> <span class="o">=</span> <span class="mi">5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">animation</span> <span class="o">=</span> <span class="n">QPropertyAnimation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;circle_position&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">animation</span><span class="o">.</span><span class="n">setEasingCurve</span><span class="p">(</span><span class="n">animation_curve</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">animation</span><span class="o">.</span><span class="n">setDuration</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>  <span class="c1"># Time in millisecondes</span>
+
+        <span class="c1"># Connect state changed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stateChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start_transition</span><span class="p">)</span>
+
+    <span class="c1"># CREATE NEW SET AND GET PROPERTIE</span>
+    <span class="nd">@pyqtProperty</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>  <span class="c1"># GET</span>
+    <span class="k">def</span> <span class="nf">circle_position</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        getter of the button position</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_circle_position</span>
+
+    <span class="nd">@circle_position</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">circle_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        setter of the button position</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_circle_position</span> <span class="o">=</span> <span class="n">pos</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+<div class="viewcode-block" id="QtToggle.start_transition"><a class="viewcode-back" href="../../../otanalysis.view.html#otanalysis.view.toggle.QtToggle.start_transition">[docs]</a>    <span class="k">def</span> <span class="nf">start_transition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        movement of the button according to the change of state</span>
+
+<span class="sd">        :parameters:</span>
+<span class="sd">            value: bool</span>
+<span class="sd">                Button status</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">animation</span><span class="o">.</span><span class="n">setStartValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circle_position</span><span class="p">)</span>
+        <span class="c1"># self.animation.stop() # Stop animation if running</span>
+        <span class="k">if</span> <span class="n">value</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">animation</span><span class="o">.</span><span class="n">setEndValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="mi">27</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">animation</span><span class="o">.</span><span class="n">setEndValue</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+        <span class="c1"># START ANIMATION</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">animation</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="QtToggle.hitButton"><a class="viewcode-back" href="../../../otanalysis.view.html#otanalysis.view.toggle.QtToggle.hitButton">[docs]</a>    <span class="k">def</span> <span class="nf">hitButton</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="n">QPoint</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Position of the circle in the rectangle forming the toggle button</span>
+
+<span class="sd">        :parameters:</span>
+<span class="sd">            pos: object</span>
+<span class="sd">                object representing a point in the plane</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">contentsRect</span><span class="p">()</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="QtToggle.paintEvent"><a class="viewcode-back" href="../../../otanalysis.view.html#otanalysis.view.toggle.QtToggle.paintEvent">[docs]</a>    <span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Drawing of the button including a rectangle with a point moving inside </span>
+<span class="sd">        according to a particular transition (left end to right end). </span>
+<span class="sd">        It also has a word centered on the opposite side of the point representing </span>
+<span class="sd">        the action to be performed  </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># SET PAINTER</span>
+        <span class="n">painter</span> <span class="o">=</span> <span class="n">QPainter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setRenderHint</span><span class="p">(</span><span class="n">QPainter</span><span class="o">.</span><span class="n">Antialiasing</span><span class="p">)</span>
+
+        <span class="c1"># SET AS NO PEN</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">NoPen</span><span class="p">)</span>
+
+        <span class="c1"># DRAW RECTANGLE</span>
+        <span class="n">rect</span> <span class="o">=</span> <span class="n">QRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
+
+        <span class="c1"># CHECK IF IS CHECKED</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+            <span class="c1"># DRAW BG</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QColor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bg_color</span><span class="p">))</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">drawRoundedRect</span><span class="p">(</span>
+                <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">()</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">()</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
+
+            <span class="c1"># DRAW CIRCLE</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QColor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_circle_color</span><span class="p">))</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">drawEllipse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_circle_position</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">22</span><span class="p">)</span>
+
+            <span class="c1"># Write Text</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">QColor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_active_color</span><span class="p">))</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">QFont</span><span class="p">(</span><span class="s1">&#39;Arial Black&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="n">QFont</span><span class="o">.</span><span class="n">Bold</span><span class="p">))</span>
+
+            <span class="n">taille_cadre</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">()</span>
+            <span class="n">length_word</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inactive_text</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span>
+            <span class="n">marge</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span>
+            <span class="k">if</span> <span class="n">taille_cadre</span> <span class="o">&lt;</span> <span class="mi">110</span><span class="p">:</span>
+                <span class="n">pos_x</span> <span class="o">=</span> <span class="n">taille_cadre</span> <span class="o">-</span> <span class="n">length_word</span> <span class="o">+</span> <span class="p">((</span><span class="n">taille_cadre</span><span class="o">-</span><span class="mi">110</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">pos_x</span> <span class="o">=</span> <span class="n">taille_cadre</span> <span class="o">-</span> <span class="n">length_word</span> <span class="o">-</span> <span class="p">((</span><span class="n">taille_cadre</span><span class="o">-</span><span class="mi">110</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">pos_x</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span><span class="o">//</span><span class="mf">1.5</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">inactive_text</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># DRAW BG</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QColor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_active_color</span><span class="p">))</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">drawRoundedRect</span><span class="p">(</span>
+                <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+            <span class="c1"># DRAW CIRCLE</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QColor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_circle_color</span><span class="p">))</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">drawEllipse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_circle_position</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">22</span><span class="p">)</span>
+
+            <span class="c1"># Write Text</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">QColor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bg_color</span><span class="p">))</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">QFont</span><span class="p">(</span><span class="s1">&#39;Arial Black&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="n">QFont</span><span class="o">.</span><span class="n">Bold</span><span class="p">))</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span><span class="o">//</span><span class="mf">1.5</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">active_text</span><span class="p">)</span>
+
+        <span class="c1"># END DRAW</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">end</span><span class="p">()</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, GNU GENERAL PUBLIC LICENSE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

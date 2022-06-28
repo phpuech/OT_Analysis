@@ -1,0 +1,35 @@
+[build-system]
+requires = [
+    'setuptools>=54',
+    'wheel',
+    'importlib-metadata; python_version>"3.7"',
+    'numpy>=1.21',
+    'scipy',
+    'pandas',
+    'matplotlib',
+    'PyQt5',
+    'supyr-struct'
+]
+build-backend = "setuptools.build_meta"
+
+[tool.pylint.'MASTER']
+max-statements=100
+too-many-locals=100
+max-line-length=150
+max-branches = 20
+max-locals = 60
+max-nested-blocks = 10
+max-args = 10
+init-hook='import sys; sys.path.append("src/otanalysis")'
+extension-pkg-whitelist=['PyQt5']
+disable=[
+    'too-many-instance-attributes',
+    'too-many-lines',
+    'invalid-name',
+    'attribute-defined-outside-init',
+    'broad-except',
+    'too-many-public-methods',
+    'unbalanced-tuple-unpacking'
+]
+
+

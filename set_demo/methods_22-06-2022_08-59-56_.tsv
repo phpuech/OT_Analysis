@@ -1,0 +1,2 @@
+	condition	drug	bead_radius	model	eta	pulling_length	threshold_align	jump_force	jump_distance	jump_point	factor_noise	width_window_smooth	optical
+methods	NaN	NaN	1.0	Linear	0.5	50	30	5.0	200	200	4.0	151	None

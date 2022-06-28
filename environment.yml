@@ -1,0 +1,16 @@
+name: otanalysis
+channels:
+- conda-forge
+
+dependencies:
+- pip
+- numpy>=1.21
+- matplotlib
+- pandas
+- scipy
+- pyqt
+- qtpy
+- pip:
+    - supyr-struct
+    - OTAnalysis
+# conda-feedstock // conda-forge

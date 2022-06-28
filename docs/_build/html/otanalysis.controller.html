@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>otanalysis.controller package &mdash; OTAnalysis 0.2.72 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="otanalysis.extractor package" href="otanalysis.extractor.html" />
+    <link rel="prev" title="otanalysis package" href="otanalysis.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> OTAnalysis
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="readme_link.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme_link.html#otanalysis">OTAnalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme_link.html#tool-for-managing-the-results-of-optical-tweezers">Tool for managing the results of optical tweezers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme_link.html#install-miniconda-create-conda-environment">Install MiniConda &amp;&amp; Create conda environment</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">OTAnalysis</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="otanalysis.html">otanalysis package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="otanalysis.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">otanalysis.controller package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="otanalysis.extractor.html">otanalysis.extractor package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="otanalysis.model.html">otanalysis.model package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="otanalysis.view.html">otanalysis.view package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="otanalysis.html#module-otanalysis">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="setup_logger.html">setup_logger module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">OTAnalysis</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">OTAnalysis</a> &raquo;</li>
+          <li><a href="otanalysis.html">otanalysis package</a> &raquo;</li>
+      <li>otanalysis.controller package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/otanalysis.controller.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="otanalysis-controller-package">
+<h1>otanalysis.controller package<a class="headerlink" href="#otanalysis-controller-package" title="Permalink to this headline"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-otanalysis.controller.controller">
+<span id="otanalysis-controller-controller-module"></span><h2>otanalysis.controller.controller module<a class="headerlink" href="#module-otanalysis.controller.controller" title="Permalink to this headline"></a></h2>
+<p>Class Controller</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">otanalysis.controller.controller.</span></span><span class="sig-name descname"><span class="pre">Controller</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">view</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Instantiates “controller” objects for processing optical curves</p>
+<p>initialization of the basic attributes of the control</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>view: Object</dt><dd><p>interface object</p>
+</dd>
+<dt>path_files: str</dt><dd><p>path of the folder containing the curves to be analyzed</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.add_feature">
+<span class="sig-name descname"><span class="pre">add_feature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_curve</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.add_feature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.add_feature" title="Permalink to this definition"></a></dt>
+<dd><p>Allows to add data to the parameter dictionary of each curve</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>name_curve: str</dt><dd><p>file name of the curve</p>
+</dd>
+<dt>add_key: str</dt><dd><p>key to add in the features</p>
+</dd>
+<dt>add_value: struct</dt><dd><p>any data structure storing important information</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.alignment_curve">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">alignment_curve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_curve</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_align</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.alignment_curve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.alignment_curve" title="Permalink to this definition"></a></dt>
+<dd><p>Calls the result of the method of checking the curved object well aligned on the main axis.
+If not then export the file to a rejected directory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>file: str</dt><dd><p>name of the curve file</p>
+</dd>
+<dt>new_curve: Object</dt><dd><p>curve for the analysis of the alignment</p>
+</dd>
+<dt>threshold_align: int</dt><dd><p>percentage of maximum force for misalignment</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>dict_align: dict</dt><dd><p>information on the good or bad alignment as well as the secondary axis(es) involved</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.check_file_incomplete">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">check_file_incomplete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lines</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header_global</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nb_segments</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.check_file_incomplete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.check_file_incomplete" title="Permalink to this definition"></a></dt>
+<dd><p>Checks the file, especially if the segments comply
+with the information present in the file header</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>lines: str</dt><dd><p>all lines of the file</p>
+</dd>
+<dt>header_global: dict</dt><dd><p>dictionary of header information</p>
+</dd>
+<dt>nb_segments: int</dt><dd><p>number of segments stipulated by the header</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>check_file: bool</dt><dd><p>returns true if the file is not truncated</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.clear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.clear" title="Permalink to this definition"></a></dt>
+<dd><p>Reset of the controller data structure</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.click_curve">
+<span class="sig-name descname"><span class="pre">click_curve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annotations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance_y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.click_curve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.click_curve" title="Permalink to this definition"></a></dt>
+<dd><p>click on the scatters plot to display the name of the corresponding curve</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>event: signal object</dt><dd><p>mouse click event</p>
+</dd>
+<dt>ax: object</dt><dd><p>matplotlib object to work on the chosen axis</p>
+</dd>
+<dt>fig: object</dt><dd><p>fig matplotlib to refresh the figure at each click</p>
+</dd>
+<dt>annotations: list</dt><dd><p>list of annotations for each point on the axis</p>
+</dd>
+<dt>tolerance_x: float</dt><dd><p>tolerance on the x-axis to check that the click is at the position of an existing point</p>
+</dd>
+<dt>tolerance_y: float</dt><dd><p>idem on the ordinate axis</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.count_cell_bead">
+<span class="sig-name descname"><span class="pre">count_cell_bead</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.count_cell_bead"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.count_cell_bead" title="Permalink to this definition"></a></dt>
+<dd><p>Calculation of the number of cells, beads and couples in each set for the bilan window</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>nb_beads: int</dt><dd><p>number of beads</p>
+</dd>
+<dt>nb_cells: int</dt><dd><p>number of cells</p>
+</dd>
+<dt>nb_couples: int</dt><dd><p>number of couples</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.create_dict_curves">
+<span class="sig-name descname"><span class="pre">create_dict_curves</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methods</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">list_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.create_dict_curves"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.create_dict_curves" title="Permalink to this definition"></a></dt>
+<dd><p>creation of the curve list according to the file extension and its conformity</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>methods: dict</dt><dd><p>Set of parameters to enter in the interface to launch the analysis</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.create_list_files">
+<span class="sig-name descname"><span class="pre">create_list_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict_files</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.create_list_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.create_list_files" title="Permalink to this definition"></a></dt>
+<dd><p>Creation of a file list based on a given directory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>path: str</dt><dd><p>path to a study folder</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.create_object_curve">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">create_object_curve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_align</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pulling_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.create_object_curve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.create_object_curve" title="Permalink to this definition"></a></dt>
+<dd><p>Creation of the Curve object after extraction of the data from the jpk-nt-force coded file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>file: str</dt><dd><p>path to the jpk-nt-force folder to extract and transform into a Curve python object</p>
+</dd>
+<dt>threshold_align: int</dt><dd><p>percentage of maximum force for misalignment</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>new_curve: Object</dt><dd><p>returns our curve object ready for analysis and classification</p>
+</dd>
+<dt>check_incomplete: bool</dt><dd><p>takes True if the file is incomplete otherwise False</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.display_legend">
+<span class="sig-name descname"><span class="pre">display_legend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fig</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.display_legend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.display_legend" title="Permalink to this definition"></a></dt>
+<dd><p>management of the display of the legend on the graphs thanks to an option in the Edit menu</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>fig: object</dt><dd><p>matplotlib figure on which to remove the legend</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.file_incomplete_rejected">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">file_incomplete_rejected</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">extension</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.file_incomplete_rejected"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.file_incomplete_rejected" title="Permalink to this definition"></a></dt>
+<dd><p>Allows you to copy files with incomplete segments to a folder</p>
+<dl class="simple">
+<dt>;parameters:</dt><dd><dl class="simple">
+<dt>extension: str</dt><dd><p>extension of the curve file (txt or jpk-nt-force)</p>
+</dd>
+<dt>file: str</dt><dd><p>name of the curve file</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.file_troncated">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">file_troncated</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jpk_object</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.file_troncated"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.file_troncated" title="Permalink to this definition"></a></dt>
+<dd><p>Verification of uninterrupted file during manipulation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>jpk_object: object</dt><dd><p>the object representing the jpk-net-force encryption folder</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>troncated: bool</dt><dd><p>returns true if number of segments not in agreement
+with the initiated one otherwise false</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.global_plot">
+<span class="sig-name descname"><span class="pre">global_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.global_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.global_plot" title="Permalink to this definition"></a></dt>
+<dd><p>Function allowing the graphical representation of the curves on the different axes
+as a function of time and the main axis on the distance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>n: int</dt><dd><p>index of the curve in the curves dict</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>fig: object</dt><dd><p>the figure to be displayed in the canvas</p>
+</dd>
+<dt>curve: object</dt><dd><p>the curve associated with the figure</p>
+</dd>
+<dt>check_distance: bool</dt><dd><p>presence of the distance column in the curve segment data</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.make_autopct">
+<span class="sig-name descname"><span class="pre">make_autopct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pct</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dico</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.make_autopct"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.make_autopct" title="Permalink to this definition"></a></dt>
+<dd><p>management of the labels of the corners of the diagram</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p>dico:dictionary of values and labels of the diagram</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>pct: percentage
+val: label</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.manage_list_files">
+<span class="sig-name descname"><span class="pre">manage_list_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.manage_list_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.manage_list_files" title="Permalink to this definition"></a></dt>
+<dd><p>management of the number of files given as input.
+If greater than 1000 no supervision</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>path: str</dt><dd><p>path of the directory to be processed recursively</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.management_data">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">management_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nb_segments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_segment</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header_global</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.management_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.management_data" title="Permalink to this definition"></a></dt>
+<dd><p>allows to manage the different cases of segmentation of the curves</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>file: str</dt><dd><p>file to process</p>
+</dd>
+<dt>nb_segments: int</dt><dd><p>number segments in the file</p>
+</dd>
+<dt>num_segment: int</dt><dd><p>segment number in progress</p>
+</dd>
+<dt>header_global: dict</dt><dd><p>global information for the curve file</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>segment: object</dt><dd><p>a segment object with 1 header dictionary and 1 dataframe</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.open_file">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">open_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_align</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pulling_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.open_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.open_file" title="Permalink to this definition"></a></dt>
+<dd><p>if file .txt
+Processing of the curve file to create an object
+with all the information necessary for its study</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>file: str</dt><dd><p>name of the curve file</p>
+</dd>
+<dt>threshold_align: int</dt><dd><p>percentage of maximum force for misalignment</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>new_curve: object</dt><dd><p>Curved object with 1 title, 4 dictionaries and 2 dataframes</p>
+</dd>
+<dt>check_incomplete: bool</dt><dd><p>takes True if the file is incomplete otherwise False</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.output_save">
+<span class="sig-name descname"><span class="pre">output_save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_directory</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.output_save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.output_save" title="Permalink to this definition"></a></dt>
+<dd><p>Transformation of the characteristics of each curve into a general dataframe.
+Writing of this dataframe in a csv file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>path_directory: str</dt><dd><p>name of the folder to save the output</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.parsing_data">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">parsing_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.parsing_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.parsing_data" title="Permalink to this definition"></a></dt>
+<dd><p>Function that parses the data to produce a matrix</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>file: str</dt><dd><p>file to parse</p>
+</dd>
+<dt>endfile: bool</dt><dd><p>boolean to know if we are at the end of the file after this data set</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>data: matrix</dt><dd><p>list of data lists per row of 15 columns</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.parsing_generic">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">parsing_generic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.parsing_generic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.parsing_generic" title="Permalink to this definition"></a></dt>
+<dd><p>Functioning to parse the headers of jpk_nt_force text files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>file: str</dt><dd><p>file to parse</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>header: dict</dt><dd><p>dictionary retrieving all the information from the parsed header</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.piechart">
+<span class="sig-name descname"><span class="pre">piechart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.piechart"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.piechart" title="Permalink to this definition"></a></dt>
+<dd><p>creation of pie charts for the analysis balance window</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p>fig: main figure blank to be completed</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>fig: main figure completed by the different diagrams</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.piechart_alignment">
+<span class="sig-name descname"><span class="pre">piechart_alignment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_alignment</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.piechart_alignment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.piechart_alignment" title="Permalink to this definition"></a></dt>
+<dd><p>Creation of the piechart to identify the proportion of misaligned curves
+compared to those that can be analyzed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ax: object</dt><dd><p>the axis to modify for piechart display</p>
+</dd>
+<dt>name_alignment: str</dt><dd><p>management of the alignment before and after supervision</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>ax: object</dt><dd><p>the axis containing the generated piechart</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.piechart_classification">
+<span class="sig-name descname"><span class="pre">piechart_classification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nb_conforming_curves</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_classification</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.piechart_classification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.piechart_classification" title="Permalink to this definition"></a></dt>
+<dd><p>Function allowing the creation of classification charts before and after supervision
+This classification is only for well aligned curves and therefore conforms</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ax: object</dt><dd><p>the axis to modify for piechart display</p>
+</dd>
+<dt>nb_conforming_curves: int</dt><dd><p>Number of curves meeting compliance criteria</p>
+</dd>
+<dt>name_classification: str</dt><dd><p>name of the classification to be done (before or after supervision)</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>ax: object</dt><dd><p>the axis containing the generated piechart</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.piechart_incomplete">
+<span class="sig-name descname"><span class="pre">piechart_incomplete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.piechart_incomplete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.piechart_incomplete" title="Permalink to this definition"></a></dt>
+<dd><p>Creation of the piechart to determine the proportion of non-compliant
+or incomplete files compared to the original set</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ax: object</dt><dd><p>the axis to modify for piechart display</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>ax: object</dt><dd><p>the axis containing the generated piechart</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.piechart_optical_correction">
+<span class="sig-name descname"><span class="pre">piechart_optical_correction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.piechart_optical_correction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.piechart_optical_correction" title="Permalink to this definition"></a></dt>
+<dd><p>creation of a pie chart to display the proportion of optical correction according to the chosen mode
+(None, Auto, Manual)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ax: object</dt><dd><p>the axis to modify for piechart display</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>ax: object</dt><dd><p>the axis containing the generated piechart</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.plot_distance">
+<span class="sig-name descname"><span class="pre">plot_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">curve</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_position</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.plot_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.plot_distance" title="Permalink to this definition"></a></dt>
+<dd><p>allows the display of graphs as a function of the distance on the 2 segments</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>curve: Object</dt><dd><p>curve under analysis</p>
+</dd>
+<dt>segment: Object</dt><dd><p>segment motion of the curve</p>
+</dd>
+<dt>ax: Object</dt><dd><p>axis of the figure where to put the graph</p>
+</dd>
+<dt>graph_position: int</dt><dd><p>position of the graph on the figure</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>graph_position: int</dt><dd><p>back to the following chart positi</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.plot_time">
+<span class="sig-name descname"><span class="pre">plot_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">curve</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_position</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.plot_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.plot_time" title="Permalink to this definition"></a></dt>
+<dd><p>allows the display of graphs as a function of time on the 3 axes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>curve: Object</dt><dd><p>curve under analysis</p>
+</dd>
+<dt>fig: Object</dt><dd><p>figure where to insert the graphics</p>
+</dd>
+<dt>graph_position: int</dt><dd><p>position of the graph on the figure</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>graph_position: int</dt><dd><p>back to the following chart position</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.problematic_curve">
+<span class="sig-name descname"><span class="pre">problematic_curve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.problematic_curve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.problematic_curve" title="Permalink to this definition"></a></dt>
+<dd><p>function allowing to put in a separate folder the curves having had
+a problem during their analysis</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>file: str</dt><dd><p>name of the file to copy</p>
+</dd>
+<dt>extension: str</dt><dd><p>file extension</p>
+</dd>
+<dt>message: str</dt><dd><p>message to write in the terminal</p>
+</dd>
+<dt>error: object</dt><dd><p>error according to the exception raised</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.save_graphs">
+<span class="sig-name descname"><span class="pre">save_graphs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory_graphs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.save_graphs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.save_graphs" title="Permalink to this definition"></a></dt>
+<dd><p>recording of all the graphs of the analysis</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>directory_graphs: str</dt><dd><p>path to which to save the graphs</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.save_plot_step">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">save_plot_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">curve</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">abscissa_curve</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directory_graphs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.save_plot_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.save_plot_step" title="Permalink to this definition"></a></dt>
+<dd><p>recording of step-by-step graphics. Only the one displayed is saved as a png image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>fig: object</dt><dd><p>figure with graphics</p>
+</dd>
+<dt>curve: Object</dt><dd><p>curve object corresponding to the graphs</p>
+</dd>
+<dt>abscissa_curve: str</dt><dd><p>name of the data for the abscissa of the curve</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>name_img: str</dt><dd><p>name of the created image</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.scatter_bilan">
+<span class="sig-name descname"><span class="pre">scatter_bilan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.scatter_bilan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.scatter_bilan" title="Permalink to this definition"></a></dt>
+<dd><p>scatter plot for a general verification of the classification results thanks to the characteristic points</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>fig: object</dt><dd><p>figure matplotlib to be modified to display scatters instead of piecharts</p>
+</dd>
+<dt>gs: object</dt><dd><p>grid for the placement of the axes on the figure</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.set_view">
+<span class="sig-name descname"><span class="pre">set_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">view</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.set_view"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.set_view" title="Permalink to this definition"></a></dt>
+<dd><p>setter of the view attribute</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>view: Object</dt><dd><p>interface object</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.Controller.show_plot">
+<span class="sig-name descname"><span class="pre">show_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">abscissa_curve</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'time'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#Controller.show_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.Controller.show_plot" title="Permalink to this definition"></a></dt>
+<dd><p>creation of graphs by curves 2 per page maximum</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>n: int</dt><dd><p>index of the curve list</p>
+</dd>
+<dt>abscissa_curve: str</dt><dd><p>name of the data for the abscissa of the curve</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>fig: Object</dt><dd><p>figure to be displayed on the interface canvas</p>
+</dd>
+<dt>curve: Object</dt><dd><p>the current curve to display graphs</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="otanalysis.controller.controller.parse_args">
+<span class="sig-prename descclassname"><span class="pre">otanalysis.controller.controller.</span></span><span class="sig-name descname"><span class="pre">parse_args</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/otanalysis/controller/controller.html#parse_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otanalysis.controller.controller.parse_args" title="Permalink to this definition"></a></dt>
+<dd><p>function to add command line arguments to run the controller without GUI</p>
+</dd></dl>
+
+</section>
+<section id="module-otanalysis.controller">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-otanalysis.controller" title="Permalink to this headline"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="otanalysis.html" class="btn btn-neutral float-left" title="otanalysis package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="otanalysis.extractor.html" class="btn btn-neutral float-right" title="otanalysis.extractor package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, GNU GENERAL PUBLIC LICENSE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
