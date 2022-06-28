@@ -74,7 +74,7 @@ chmod +x Miniconda3-latest-Linux-x86_64.sh
 ./Miniconda3-latest-Linux-x86_64.sh
 conda create -n newenv
 conda activate newenv
-
+```
 
 
 # Install package
@@ -287,4 +287,8 @@ if we want to add a new feature after analysis but on the object *curve :
 - You will have to implement methods in the specific curve object of your data
 - modify the start of the analysis in the controller in the "create_dict_curves" method
 - adapt the supervision to the data to display
+
+
+## Prospect
+* Problem on some computers for the pick event of matplotlib
 
