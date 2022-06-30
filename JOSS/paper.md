@@ -1,11 +1,11 @@
 ---
-title: "OT-Analysis : a software for rich analysis of force curves when probing living cells with optical tweezers"
+title: 'OT-Analysis: a software for rich analysis of force curves when probing living cells with optical tweezers'
 tags:
     - Python
     - optical tweezers
     - cell biology
     - mechanobiology
-author:
+authors:
     - name: Thierry Galliano
         affiliation: 1 # (Multiple affiliations must be quoted)
     - name: Guillaume Gay
