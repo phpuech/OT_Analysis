@@ -1,29 +1,29 @@
 ---
-title: "OT-Analysis : a software for rich analysis of force curves when probing living cells with optical tweezers "
+title: "OT-Analysis : a software for rich analysis of force curves when probing living cells with optical tweezers"
 tags:
     - Python
     - optical tweezers
     - cell biology
     - mechanobiology
 author:
-\- name: Thierry Galliano
-    affiliation: 1 # (Multiple affiliations must be quoted)
-\- name: Guillaume Gay
-    orcid: 0000-0002-5444-5246
-    affiliation: 2 # (Multiple affiliations must be quoted)
-\- name: Laurent Limozin
-    orcid: 0000-0001-9523-8086
-    affiliation: 1 # (Multiple affiliations must be quoted)
-\- name: Pierre-Henri Puech
-    corresponding : true
-    orcid:  0000-0002-8521-0685
-    affiliation: 1 # (Multiple affiliations must be quoted)  
+    - name: Thierry Galliano
+        affiliation: 1 # (Multiple affiliations must be quoted)
+    - name: Guillaume Gay
+        orcid: 0000-0002-5444-5246
+        affiliation: 2 # (Multiple affiliations must be quoted)
+    - name: Laurent Limozin
+        orcid: 0000-0001-9523-8086
+        affiliation: 1 # (Multiple affiliations must be quoted)
+    - name: Pierre-Henri Puech
+        corresponding : true
+        orcid:  0000-0002-8521-0685
+        affiliation: 1 # (Multiple affiliations must be quoted)  
   
 affiliations:
- \- name: Inserm UMR 1067 / CNRS UMR 7333 / AMU UM61 / CENTURI ; Lab. Adhésion et Inflammation ; Marseille - France
-   index: 1
- \- name: France Bio Imaging ; Montpellier - France
-   index: 2
+    - name: Inserm UMR 1067 / CNRS UMR 7333 / AMU UM61 / CENTURI ; Lab. Adhésion et Inflammation ; Marseille - France
+        index: 1
+    - name: France Bio Imaging ; Montpellier - France
+        index: 2
 date: 30 june 2022
 bibliography: paper.bib
 
