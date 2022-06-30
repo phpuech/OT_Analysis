@@ -20,7 +20,7 @@ authors:
     affiliation: 1 # (Multiple affiliations must be quoted)  
   
 affiliations:
-  - name: Inserm UMR 1067 / CNRS UMR 7333 / AMU UM61 / CENTURI ; Lab. Adhésion et Inflammation ; Marseille - France
+  - name: Inserm UMR 1067, CNRS UMR 7333, AMU UM61, The Turing Centre for Living Systems (CENTURI) ; Lab. Adhésion et Inflammation ; Marseille - France
     index: 1
   - name: France Bio Imaging ; Montpellier - France
     index: 2
@@ -36,24 +36,24 @@ Optical tweezers are a light-based technique for micromanipulating
 objects. It allows to move objects such as microbeads and cells, and to
 record minute forces down to a few pN, which makes it a technique very
 well adapted to mechanical measurements on living cells
-[@gennerich_optical_2017]. We are interested in the mechano-transduction
+[@gennerich_optical:2017]. We are interested in the mechano-transduction
 properties of lymphocytes. We seek to dissect the effect of forces and
 cell mechanics on the cellular response, in the context of the immune
 system. T cell mechanotransduction has been recently demonstrated to be
 instrumental in the finesse and accuracy of the response of the latter
-[@puech_mechanotransduction_2021]. Aside, cells can exert forces when
+@puech_mechanotransduction:2021]. Aside, cells can exert forces when
 performing their action, eg. cytotoxic T cells are using forces to kill
-target infected cells [@basu_cytotoxic_2016].
+target infected cells [@basu_cytotoxic:2016].
 
 Using optical tweezers and specifically decorated beads as handles, we
 pull membrane nano-tubes from gently adhered living lymphocytes
-[@sadoun_dissecting_2020]. Such nanotubes are usually used to probe the
-tension of adherent cells [@diz-munoz_control_2010]. By varying the
+[@sadoun_dissecting:2020]. Such nanotubes are usually used to probe the
+tension of adherent cells [@diz-munoz_control:2010]. By varying the
 antibodies that are used to decorate the beads, we select the molecule
 type we specifically pull on, and we then explore the molecules which
 are characteristic of the immune synapse, that is one of the key
 organisational structures that has profound implications in T cell
-recognition and action [@baldari_immune_2017].
+recognition and action [@baldari_immune:2017].
 
 Using this approach, we probe not only the forces of recognition of the
 given antibody to its target molecule, but also, by using strong
@@ -61,7 +61,7 @@ extracellular bridges, we probe the cytosolic link of the probed
 molecule to the cytoskeleton. Such a link has been proposed to be
 instrumental in the way T cells can apply or feel forces through the
 molecule. A theoretical model has been built and will be reported in a
-dedicated article [@manca_membrane_2022]. Aside, we will demonstrate the
+dedicated article [@manca_membrane:2022]. Aside, we will demonstrate the
 application of the software on full data.
 
 ![Schematics of the experiment. A : Sequence of events (a) antibody
@@ -71,7 +71,7 @@ formed under a controlled level of force and maintained for a given time
 ; (c) the cell is displaced away from the bead, eventually resulting in
 the pulling of a tube (d) and its rupture (e), back to the situation of
 (a). B : Resulting Force vs.Time curve with the indicated events.
-Adapted from [@manca_membrane_2022]](dessin2.png){#fig:dessin
+Adapted from [@manca_membrane:2022]](dessin2.png){#fig:dessin
 width="\\linewidth"}
 
 The experimentally obtained data consists in force signal as a function
@@ -102,7 +102,7 @@ user-to-user data comparison.
 Aside, almost none, if any, open source software has been proposed to
 the community eg. via GitHub or GitLab for quantifying optical tweezers
 experiments with living cells, while some have been proposed for Atomic
-Force Microscopy force mode [@muller_nanite_2019], with a modular
+Force Microscopy force mode [@muller_nanite:2019], with a modular
 capability. Among them, one can find, with the keywords \"optical
 tweezers\", on GitHub :
 
