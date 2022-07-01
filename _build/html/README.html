@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OT_Analysis &mdash; OT_Analysis 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> OT_Analysis
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="readme_link.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme_link.html#ot-analysis">OT_Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme_link.html#tool-for-managing-the-results-of-optical-tweezers">Tool for managing the results of optical tweezers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme_link.html#install-miniconda-create-conda-environment">Install MiniConda &amp;&amp; Create conda environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme_link.html#install-package">Install package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme_link.html#launch-project">Launch project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme_link.html#documentation">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_doc.html">DOC_USER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_doc.html#center-ot-analysis-a-software-for-rich-analysis-of-force-curves-from-optical-tweezer-with-living-cells-center"><span class="raw-html-m2r"><center> OT-Analysis : a software for rich analysis of force curves from optical tweezer (with living cells)</center></span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">OT_Analysis</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">OT_Analysis</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>OT_Analysis</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/README.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <a class="reference external image-reference" href="https://img.shields.io/badge/Python-3.8.5-blue.svg"><img alt="Python 3.8.5" src="https://img.shields.io/badge/Python-3.8.5-blue.svg" /></a>
+<a class="reference external image-reference" href="https://img.shields.io/badge/PyQt-5.15.0-green.svg"><img alt="PyQt 5.15.0" src="https://img.shields.io/badge/PyQt-5.15.0-green.svg" /></a>
+<a class="reference external image-reference" href="https://img.shields.io/badge/GNU-GPL3-red.svg"><img alt="License GPL" src="https://img.shields.io/badge/GNU-GPL3-red.svg" /></a>
+<section id="ot-analysis">
+<h1>OT_Analysis<a class="headerlink" href="#ot-analysis" title="Permalink to this heading"></a></h1>
+</section>
+<section id="tool-for-managing-the-results-of-optical-tweezers">
+<h1>Tool for managing the results of optical tweezers<a class="headerlink" href="#tool-for-managing-the-results-of-optical-tweezers" title="Permalink to this heading"></a></h1>
+<p>Tool for extracting, analyzing and classifying optical tweezer data curves</p>
+<section id="flow-of-the-use-process">
+<h2>Flow of the use process<a class="headerlink" href="#flow-of-the-use-process" title="Permalink to this heading"></a></h2>
+<p>Launch on an interface allowing to select the parameters for a file analysis in back-end</p>
+<section id="condition-of-the-experience">
+<h3>Condition of the experience<a class="headerlink" href="#condition-of-the-experience" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>condition: Name of the antibody present on the beads during the experiment</p></li>
+<li><p>drug: name of the drug used for the analysis if present</p></li>
+</ul>
+</section>
+<section id="fitting-management">
+<h3>Fitting management<a class="headerlink" href="#fitting-management" title="Permalink to this heading"></a></h3>
+<p>Selection of the curve files to be analyzed either by selecting a directory or with the multiple selection of files</p>
+<ul class="simple">
+<li><p>model: The model used to fit the “Press” curves (linear or sphere)
+If selected sphere, appearance of the physical parameters menu for the calculation of the Young’s modulus</p></li>
+<li><p>eta: Poisson’s ratio</p></li>
+<li><p>bead rdius: diameter of the ball used during the experiment</p></li>
+</ul>
+</section>
+<section id="management-of-curve-anomalies">
+<h3>Management of curve anomalies<a class="headerlink" href="#management-of-curve-anomalies" title="Permalink to this heading"></a></h3>
+<p>Curve management parameters Incomplete (no analysis possible) or misaligned (analysis but warning)</p>
+<ul class="simple">
+<li><p>pulling length min : minimum percentage of the length of the “Pull” segment to determine if the curve is rejected despite the presence of all the segments indicated in the header</p></li>
+<li><p>Fmax epsilon: percentage of max force on the major axis to determine misalignment of the curve on the minor axes</p></li>
+</ul>
+</section>
+<section id="classification-condition">
+<h3>Classification condition<a class="headerlink" href="#classification-condition" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>NAD if jump is &lt; (PN): force condition to classify non-adhesive curves &lt; pN</p></li>
+<li><p>AD if position is &lt; (nm): distance condition to separate the membership from the tubes</p></li>
+<li><p>AD if slope is &lt; (pts): condition number of points to separate the membership of the tubes</p></li>
+<li><p>Factor overcome noise (xSTD): Number of times the standard deviation for the calculation of the characteristic points</p></li>
+<li><p>Factor optical effect (xSTD): Number of times the standard deviation to correct the optical effect</p></li>
+</ul>
+<p>Appearance of a method loading button after loading data to redo a past analysis.</p>
+</section>
+</section>
+<section id="menu-after-launching-the-analysis">
+<h2>Menu after launching the analysis<a class="headerlink" href="#menu-after-launching-the-analysis" title="Permalink to this heading"></a></h2>
+<p>Three possible options:</p>
+<ul class="simple">
+<li><p>Supervised: Allows you to switch to a new window with the display of curves and a supervisory menu</p></li>
+<li><p>Unsupervised: Allows you to retrieve the output file of the automatic analysis</p></li>
+<li><p>…with graphs: Allows you to retrieve the output file of the automatic analysis completed with all the graphs</p></li>
+</ul>
+<p>If we choose supervised:</p>
+</section>
+<section id="graphic-display-window-with-supervision">
+<h2>Graphic display window with supervision<a class="headerlink" href="#graphic-display-window-with-supervision" title="Permalink to this heading"></a></h2>
+<p>Visualization of all curves as a function of time on the 3 axes and as a function of distance on the main_axis</p>
+<section id="supervision-menu">
+<h3>Supervision menu<a class="headerlink" href="#supervision-menu" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Close supervision Panel: Possibility to close this menu for a more important visualization of the curves</p></li>
+<li><p>Buttons to navigate between the curves. Can be operated with the left/right arrow keys</p></li>
+<li><p>Button to save the displayed graphic</p></li>
+<li><p>Button to save the output file with an indication that the supervision is stopped at this curve (treat_supervised column)</p></li>
+<li><p>curve name</p></li>
+<li><p>button for zooming with characteristic point and fit on distance curves (Pull and Press segment only)</p></li>
+<li><p>if curve misaligned warning of misalignment axis with a possibility to change this status</p></li>
+<li><p>fit validation of the Press segment</p></li>
+<li><p>management of the optical correction with a post-analysis control</p></li>
+<li><p>fit validation of the Pull segment</p></li>
+<li><p>correction of the type of curve classification (type defined checked)</p></li>
+<li><p>Pagination to determine our position in the whole analysis. Possibility to move with the ‘Enter’ key and the number of the curve</p></li>
+</ul>
+</section>
+<section id="changes-in-points-and-fits">
+<h3>Changes in points and fits<a class="headerlink" href="#changes-in-points-and-fits" title="Permalink to this heading"></a></h3>
+<p>In the supervision interface, you can modify the characteristic points and curve fits:
+Go to the force vs distance curve
+In the menu press Edit/Pick event
+in the secondary window that appears choose what you want to modify and click on OK
+then click on the graph:</p>
+<ul class="simple">
+<li><p>on the selected point</p></li>
+<li><p>on the two extreme points for the fit</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="install-miniconda-create-conda-environment">
+<h1>Install MiniConda &amp;&amp; Create conda environment<a class="headerlink" href="#install-miniconda-create-conda-environment" title="Permalink to this heading"></a></h1>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">repo</span><span class="o">.</span><span class="n">anaconda</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">miniconda</span><span class="o">/</span><span class="n">Miniconda3</span><span class="o">-</span><span class="n">latest</span><span class="o">-</span><span class="n">Linux</span><span class="o">-</span><span class="n">x86_64</span><span class="o">.</span><span class="n">sh</span>
+<span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="n">Miniconda3</span><span class="o">-</span><span class="n">latest</span><span class="o">-</span><span class="n">Linux</span><span class="o">-</span><span class="n">x86_64</span><span class="o">.</span><span class="n">sh</span>
+<span class="o">./</span><span class="n">Miniconda3</span><span class="o">-</span><span class="n">latest</span><span class="o">-</span><span class="n">Linux</span><span class="o">-</span><span class="n">x86_64</span><span class="o">.</span><span class="n">sh</span>
+<span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">newenv</span>
+<span class="n">conda</span> <span class="n">activate</span> <span class="n">newenv</span>
+</pre></div>
+</div>
+</section>
+<section id="install-package">
+<h1>Install package<a class="headerlink" href="#install-package" title="Permalink to this heading"></a></h1>
+<p>You can install napari-openlabframe via <span class="raw-html-m2r"><a href="https://pypi.org/project/pip/" rel="opener">pip</a></span>:</p>
+<p>Installation directly through the python pip
+if OS system is Windows and Mac:</p>
+<blockquote>
+<div><p>Used Anaconda prompt not CMD or Mac console</p>
+</div></blockquote>
+<p>if OS system Linux after conda install:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span>
+<span class="n">source</span> <span class="o">.</span><span class="n">bashrc</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="n">pip</span>
+</pre></div>
+</div>
+<p>After for all:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">OT_Analysis</span>
+</pre></div>
+</div>
+<p>Installation by conda environment already create</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">TigiGln</span><span class="o">/</span><span class="n">OTAnalysis</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">OTAnalysis</span>
+<span class="n">conda</span> <span class="n">env</span> <span class="n">create</span> <span class="o">-</span><span class="n">f</span> <span class="n">environment</span><span class="o">.</span><span class="n">yml</span>
+</pre></div>
+</div>
+</section>
+<section id="launch-project">
+<h1>Launch project<a class="headerlink" href="#launch-project" title="Permalink to this heading"></a></h1>
+<p>In a termnial, run (from anywhere):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ot_analysis</span> <span class="ow">or</span> <span class="n">OT_Analysis</span>
+</pre></div>
+</div>
+</section>
+<section id="documentation">
+<h1>Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading"></a></h1>
+<section id="update">
+<h2>Update<a class="headerlink" href="#update" title="Permalink to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">html</span>
+</pre></div>
+</div>
+</section>
+<section id="visualization">
+<h2>Visualization<a class="headerlink" href="#visualization" title="Permalink to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">firefox</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">ot_analysis</span><span class="o">.</span><span class="n">readthedocs</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">en</span><span class="o">/</span><span class="n">latest</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">html</span>
+</pre></div>
+</div>
+</section>
+<section id="explanation-output-file">
+<h2>Explanation output file<a class="headerlink" href="#explanation-output-file" title="Permalink to this heading"></a></h2>
+<p>output file in the form of a table of 48 columns on the number of curves of the analysis (1 curve per line)
+columns</p>
+<section id="important-data-from-the-analysis-for-post-processing">
+<h3>Important data from the analysis for post-processing<a class="headerlink" href="#important-data-from-the-analysis-for-post-processing" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt>treat_supervised type=bool</dt><dd><p>True if curve visualized otherwise False</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>automatic_type type=str</dt><dd><p>type determined by the automatic analysis</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>type type=str</dt><dd><p>type given to the curve with the supervisor menu. If there is no supervision then the same as the ‘automatic_type’ column.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>automatic_AL type=str</dt><dd><p>“No” if the curve is misaligned according to the automatic threshold otherwise “Yes”</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>AL: str</dt><dd><p>Readjustment through supervision. If no supervision, then same as “automatic_AL”</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>automatic_AL_axe type=list</dt><dd><p>secondary axis affected by curve misalignment and its sign to know the direction of the misalignment with respect to the direction of the main axis</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>optical_state type=str</dt><dd><p>optical correction applied (No_correction, Auto_correction, Manual_correction)</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="data-of-the-analysis-parameters">
+<h3>Data of the analysis parameters<a class="headerlink" href="#data-of-the-analysis-parameters" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt>model type=str</dt><dd><p>model for the fit on “Press” segment chosen by the user for the analysis</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Date type=str</dt><dd><p>date of creation of the curve file</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Hour type=str</dt><dd><p>time of creation of the curve file</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>condition type=str</dt><dd><p>condition applied to the analysis set (often antibodies on the bead)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>drug type=str</dt><dd><p>drug put in the medium for analysis (can be used to add a second condition)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>tolerance type=float</dt><dd><p>noise tolerance for the baseline (xstd)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>bead type=str</dt><dd><p>number of the ball used for the curve</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>cell type=str</dt><dd><p>number of the cell used for the curve</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>couple type=str</dt><dd><p>couple ball number and cell number</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="theoretical-data-present-in-the-headers-of-the-files">
+<h3>Theoretical data present in the headers of the files<a class="headerlink" href="#theoretical-data-present-in-the-headers-of-the-files" title="Permalink to this heading"></a></h3>
+<ul>
+<li><dl class="simple">
+<dt>main_axis type=str</dt><dd><p>main axis of the experiment and the direction of approach of the cell with respect to the ball:</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+</span><span class="n">X</span><span class="p">:</span> <span class="n">the</span> <span class="n">cell</span> <span class="n">approaches</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">right</span>
+<span class="o">-</span><span class="n">X</span> <span class="p">:</span> <span class="n">the</span> <span class="n">cell</span> <span class="n">approaches</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">left</span>
+<span class="o">+</span><span class="n">Y</span> <span class="p">:</span> <span class="n">the</span> <span class="n">cell</span> <span class="n">comes</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">top</span>
+<span class="o">-</span><span class="n">Y</span> <span class="p">:</span> <span class="n">the</span> <span class="n">cell</span> <span class="n">comes</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">bottom</span>
+</pre></div>
+</div>
+</li>
+<li><dl class="simple">
+<dt>stiffness type=float</dt><dd><p>value of the spring stiffness to correct the distance values</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>theorical_contact_force (N) type=float</dt><dd><p>theoretical contact force between the ball and the cell required by the user before starting the experiment</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>theorical_distance_Press (m) type=float</dt><dd><p>theoretical length of the “Press” segment</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>theorical_speed_Press (m/s) type=float</dt><dd><p>theoretical speed of the “Press” segment</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>theorical_freq_Press (Hz) type=float</dt><dd><p>theoretical frequency of the “Press” segment</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>time_segment_pause_Wait1 (s) type=float</dt><dd><p>pause time of the “Wait” segment (often 0s)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>theorical_distance_Pull (m) type=float</dt><dd><p>theoretical length of the “Pull” segment</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>theorical_speed_Pull (m/s) type=float</dt><dd><p>theoretical speed of the “Pull” segment</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>theorical_freq_Pull (Hz) type=float</dt><dd><p>theoretical frequency of the “Pull” segment</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="data-calculated-during-the-analysis">
+<h3>Data calculated during the analysis<a class="headerlink" href="#data-calculated-during-the-analysis" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt>baseline_origin_press (N) type=float</dt><dd><p>average of the first 1000 points of the “Press” segment on the data without correction</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>baseline_corrected_press (pN) type=float</dt><dd><p>average of the first 1000 points of the “Press” segment on the data corrected to bring the baseline centered on 0</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>std_origin_press (N) type=float</dt><dd><p>standard deviation of the first 1000 points to define the noise rate of the curve (on the data without correction)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>std_corrected_press (pN) type=float</dt><dd><p>standard deviation of the first 1000 points to define the noise rate of the curve (on the data correction)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>slope (pN/nm) type=float</dt><dd><p>calculation of the force slope for the “Press” segment</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>error (pN/nm) type=float</dt><dd><p>calculates the error of the force slope for the “Press” segment</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>contact_point_index type=int</dt><dd><p>index of the contact point between the ball and the cell on the “Press” segment</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>contact_point_value  (pN) type=float</dt><dd><p>force value of the contact point between the ball and the cell on the “Press” segment</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>force_min_press_index type=int</dt><dd><p>index of the minimum force of the “Press” segment</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>force_min_press_value (pN) type=float</dt><dd><p>value of the minimum force of the “Press” segment</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>force_min_curve_index type=int</dt><dd><p>index of the minimum force of the curve (sometimes confused with minimum Press)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>force_min_curve_value (pN) type=float</dt><dd><p>value of the minimum force of the curve (sometimes confused with minimum Press)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>point_release_index type=int</dt><dd><p>‘index of the point where the cell loses contact with the ball (without taking into account the adhesive molecules or the membrane tubes).’</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>point_release_value (pN) type=float</dt><dd><p>value of the point where the cell loses contact with the ball (without taking into account the adhesive molecules or the membrane tubes).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>force_max_pull_index type=int</dt><dd><p>index of the maximum force on a part of the “Pull” segment between the release point and the return to the baseline</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>force_max_pull_value (pN) type=float</dt><dd><p>value of the maximum force on a part of the “Pull” segment between the release point and the return to the baseline</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>force_max_curve_index type=int</dt><dd><p>index of the maximum force of the curve</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>force_max_curve_value (pN) type=float</dt><dd><p>value of the maximum force of the curve</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Pente (pN/nm) type=float</dt><dd><p>coefficient of the contact loss slope between the ball and the cell due to the retraction effect of the cell with respect to the ball</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="data-calculated-if-type-of-curves-different-from-non-adhesive-infinite-tube-or-rejected">
+<h3>Data calculated if type of curves different from non-adhesive, infinite tube or rejected<a class="headerlink" href="#data-calculated-if-type-of-curves-different-from-non-adhesive-infinite-tube-or-rejected" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt>point_transition_index type=int</dt><dd><p>index of the break point of the tube (called transition point)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>point_transition_value (pN) type=float</dt><dd><p>value of the break point of the tube (called transition point)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>point_return_endline_index type=int</dt><dd><p>index of the point where the curve returns to the baseline values</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>point_return_endline_value type=float</dt><dd><p>value of the point where the curve returns to the baseline values</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>Jumps:</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>jump_force_start_pull (pN) type=float</dt><dd><p>force jump between the release point and the maximum force of the curve in the case of an adhesion or a finished tube</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>jump_force_end_pull (pN) type=float</dt><dd><p>force jump between the maximum force of the curve and the point of return to the baseline</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>jump_nb_points type=int</dt><dd><p>number of points between the point of return to the baseline and the maximum strength of the curve</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>jump_time_start_pull (s) type=float</dt><dd><p>time between the release point and the maximum force of the curve</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>jump_time_end_pull (s) type=float</dt><dd><p>time between the maximum force of the curve and the point of return to the baseline</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>jump_distance_start_pull (nm) type=float</dt><dd><p>distance between the release point and the maximum force of the curve</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>jump_distance_end_pull (nm) type=float</dt><dd><p>distance between the maximum force of the curve and the point of return to the baseline</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="boolean-validation-of-the-fits">
+<h3>Boolean validation of the fits<a class="headerlink" href="#boolean-validation-of-the-fits" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt>valid_fit_press type=bool</dt><dd><p>validation of the fit on the “Press” segment. False by default because not validated</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>valid_fit_pull type=bool</dt><dd><p>validation of the fit on the “Pull” segment. False by default because not validated</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+</section>
+<section id="add-features">
+<h2>Add features<a class="headerlink" href="#add-features" title="Permalink to this heading"></a></h2>
+<p>To add a feature, two options are possible:</p>
+<ul class="simple">
+<li><p>During the automatic analysis</p></li>
+<li><p>After analysis for post processing</p></li>
+</ul>
+<section id="in-analysis">
+<h3>In analysis<a class="headerlink" href="#in-analysis" title="Permalink to this heading"></a></h3>
+<p>We need to add a method to the curve object
+then call it in the “analyzed_curve” method of the curve object
+This method is called by the controller when the automatic analysis is launched</p>
+</section>
+<section id="in-interface">
+<h3>In interface<a class="headerlink" href="#in-interface" title="Permalink to this heading"></a></h3>
+<p>If we want to call an external post processing script:</p>
+<ul>
+<li><p>we create a method in the controller that loops on the dict_curve (dictionnare of curved object)</p></li>
+<li><p>we adapt our add script so that it includes the data of the object</p></li>
+<li><p>We then create a widget in the interface that calls the method of the view’s controller attribute
+if we want to add a new feature after analysis but on the object <a href="#id1"><span class="problematic" id="id2">*</span></a>curve :</p></li>
+<li><p>we add a method to curve</p></li>
+<li><p>we create a widget that calls this method through the dict-curve of the controller</p>
+<p>## Adapt input
+The input text file must have a global header, a calibration part, segment headers and data</p>
+<a class="reference external image-reference" href="./pictures/structure_file_text.png"><img alt="Screenshot" src="_images/structure_file_text.png" /></a>
+<p>If your data do not have a force (xsignal1, ysignal1, zsignal1), time (seriesTime) and distance column:</p>
+<ul class="simple">
+<li><p>You will have to implement methods in the specific curve object of your data</p></li>
+<li><p>modify the start of the analysis in the controller in the “create_dict_curves” method</p></li>
+<li><p>adapt the supervision to the data to display</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="prospect">
+<h2>Prospect<a class="headerlink" href="#prospect" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Problem on some computers for the pick event of matplotlib</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Thierry GALLIANO, Pierre-Henri PUECH, Laurent LIMOZIN, Guillaume GAY (LAI, Bio Imaging).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

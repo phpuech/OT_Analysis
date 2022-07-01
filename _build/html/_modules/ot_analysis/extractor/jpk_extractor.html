@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ot_analysis.extractor.jpk_extractor &mdash; OT_Analysis 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> OT_Analysis
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#ot-analysis">OT_Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#tool-for-managing-the-results-of-optical-tweezers">Tool for managing the results of optical tweezers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#install-miniconda-create-conda-environment">Install MiniConda &amp;&amp; Create conda environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#install-package">Install package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#launch-project">Launch project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#documentation">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_doc.html">DOC_USER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_doc.html#center-ot-analysis-a-software-for-rich-analysis-of-force-curves-from-optical-tweezer-with-living-cells-center"><span class="raw-html-m2r"><center> OT-Analysis : a software for rich analysis of force curves from optical tweezer (with living cells)</center></span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">OT_Analysis</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">OT_Analysis</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>ot_analysis.extractor.jpk_extractor</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ot_analysis.extractor.jpk_extractor</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># @author Thierry GALLIANO</span>
+<span class="c1"># @contributors Pierre-Henri PUECH, Laurent LIMOZIN, Guillaume GAY</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">JPK archive extractor for comprehensive processing of optical tweezer curves</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">zipfile</span> <span class="kn">import</span> <span class="n">ZipFile</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">struct</span> <span class="kn">import</span> <span class="n">unpack_from</span>
+
+<span class="c1">################################################################################################################################</span>
+<span class="c1">################################################################################################################################</span>
+
+
+<div class="viewcode-block" id="JPKSegment"><a class="viewcode-back" href="../../../ot_analysis.extractor.html#ot_analysis.extractor.jpk_extractor.JPKSegment">[docs]</a><span class="k">class</span> <span class="nc">JPKSegment</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class to hold data and parameters of a single segment in a JPK archive.</span>
+<span class="sd">    It is usually created internally when handling a JPK archive with the JPKFile class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shared_properties</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor</span>
+
+<span class="sd">        :parameters:</span>
+<span class="sd">            shared_properties:  </span>
+<span class="sd">                this parameter needs to hold the dictionary containing the header&#39;s contents. Otherwise it is None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#: Dictionary holding parameters read from segment header.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c1">#: Dictionary assigning numpy arrays containing data and definitions on how</span>
+        <span class="c1">#: to convert raw data to physical data to all channels present in this segment.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shared_properties</span> <span class="o">=</span> <span class="n">shared_properties</span>
+    
+    <span class="c1">################################################################################################################</span>
+
+<div class="viewcode-block" id="JPKSegment.get_array"><a class="viewcode-back" href="../../../ot_analysis.extractor.html#ot_analysis.extractor.jpk_extractor.JPKSegment.get_array">[docs]</a>    <span class="k">def</span> <span class="nf">get_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">decode</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs a numpy array containing data of given channels. If `decode` is True (default),</span>
+<span class="sd">        data is converted following conversions defined in segment&#39;s header (or shared header).</span>
+
+<span class="sd">        :parameters:</span>
+<span class="sd">             channels:</span>
+<span class="sd">              List of channels (channel names, i.e. strings) of which to return data.</span>
+
+<span class="sd">            decode: bool</span>
+<span class="sd">                Determines whether data is to be decoded, i.e. transformed according to transformation parameters defined in header files.</span>
+
+<span class="sd">        :return: </span>
+<span class="sd">            Tuple with two items: </span>
+<span class="sd">            (1) Numpy array with labeled columns, one column per requested channel; </span>
+<span class="sd">            (2) dictionary assigning units to channels.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">channels</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">channels</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">_data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">dtypes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># dimension(13 565, 1)pour le premier segment</span>
+        <span class="n">shape</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">channels</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">units</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">channels</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s1">&#39;t&#39;</span><span class="p">:</span>
+                <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;s&#39;</span>
+            <span class="k">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="s1">&#39;distance&#39;</span><span class="p">:</span>
+                <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;m/s&#39;</span>
+            <span class="k">elif</span> <span class="n">decode</span><span class="p">:</span>
+                <span class="n">d</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_decoded_data</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">d</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;digital&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;ERROR! Number of points in data channel &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="n">c</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;does not match expected number of </span><span class="si">%i</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">d</span></div>
+
+    <span class="c1">####################################################################################################</span>
+
+<div class="viewcode-block" id="JPKSegment.get_decoded_data"><a class="viewcode-back" href="../../../ot_analysis.extractor.html#ot_analysis.extractor.jpk_extractor.JPKSegment.get_decoded_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_decoded_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">conversions_to_be_applied</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get decoded data of one channel. &#39;decoded&#39; here means the raw, digital data </span>
+<span class="sd">        gets converted (to physical data) following certain conversion steps. These steps</span>
+<span class="sd">        should be defined in the JPK archive&#39;s header files. This routine tries to </span>
+<span class="sd">        read those conversion steps from those header files by default </span>
+<span class="sd">        (`conversions_to_be_applied=&#39;auto&#39;`). Alternatively, you can pass a list of</span>
+<span class="sd">        conversion keywords as `conversions_to_be_applied` manually</span>
+
+<span class="sd">        :parameters: </span>
+<span class="sd">            channel: str</span>
+<span class="sd">                Name of channel to convert data of.</span>
+
+<span class="sd">            conversions_to_be_applied: str</span>
+<span class="sd">                Specifying what conversions to apply, see description above.</span>
+
+<span class="sd">        :return: </span>
+<span class="sd">            Tuple with 2 items; </span>
+<span class="sd">                (1) Single-column numpy array containing converted data; </span>
+<span class="sd">                (2) Unit as read for last conversion step from header file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># NOT COMPLETE, CURRENTLY NOT USED!</span>
+        <span class="c1"># Idea: Chain of conversions for different channels to fall back to</span>
+        <span class="c1">#       if automatic detection of conversion protocols fails, and</span>
+        <span class="c1">#       if no conversion is manually defined in</span>
+        <span class="c1">#       function JPKSegment.get_decoded_data.</span>
+        <span class="n">DEFAULT_CONVERSION_CHAIN</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;height&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;nominal&#39;</span><span class="p">,),</span>
+                                    <span class="s1">&#39;vDeflection&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;distance&#39;</span><span class="p">,</span> <span class="s1">&#39;force&#39;</span><span class="p">),</span>
+                                    <span class="s1">&#39;hDeflection&#39;</span><span class="p">:</span> <span class="p">(),</span>
+                                    <span class="s1">&#39;strainGaugeHeight&#39;</span><span class="p">:</span> <span class="p">(),</span>
+                                    <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="p">(),</span>
+                                    <span class="s1">&#39;xSignal1&#39;</span><span class="p">:</span> <span class="p">()}</span>
+        <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;digital&#39;</span>
+        <span class="n">encoder_parameters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">channel</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;encoder_parameters&#39;</span><span class="p">]</span>
+        <span class="c1"># print(encoder_parameters)</span>
+        <span class="n">conversion_parameters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">channel</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;conversion_parameters&#39;</span><span class="p">][</span><span class="s1">&#39;conversion&#39;</span><span class="p">]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">channel</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">raw</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:]</span>
+        <span class="c1"># Independet of `conversions_to_be_applied`, the first step of conversion</span>
+        <span class="c1"># apparently has to be as defined by encoder parameters.</span>
+        <span class="k">if</span> <span class="n">encoder_parameters</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">encoder_parameters</span><span class="p">[</span><span class="s1">&#39;scaling&#39;</span><span class="p">][</span><span class="s1">&#39;style&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;offsetmultiplier&#39;</span><span class="p">:</span>
+                <span class="n">multiplier_raw</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span>
+                    <span class="n">encoder_parameters</span><span class="p">[</span><span class="s1">&#39;scaling&#39;</span><span class="p">][</span><span class="s1">&#39;multiplier&#39;</span><span class="p">])</span>
+                <span class="n">offset_raw</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">encoder_parameters</span><span class="p">[</span><span class="s1">&#39;scaling&#39;</span><span class="p">][</span><span class="s1">&#39;offset&#39;</span><span class="p">])</span>
+                <span class="n">raw</span> <span class="o">=</span> <span class="n">multiplier_raw</span> <span class="o">*</span> <span class="n">raw</span> <span class="o">+</span> <span class="n">offset_raw</span>
+
+                <span class="n">unit</span> <span class="o">=</span> <span class="n">encoder_parameters</span><span class="p">[</span><span class="s1">&#39;scaling&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;ERROR! Can only handle converters of type &#39;offsetmultiplier&#39; so far.&quot;</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="c1"># else:</span>
+        <span class="c1">#     warnings.warn(&quot;No encoder parameters found for channel &#39;{}&#39;.&quot;.format(channel))</span>
+
+        <span class="c1"># If conversions_to_be_applied is a string, it should be either &#39;default&#39; or &#39;auto&#39;.</span>
+        <span class="c1"># I recommend always using auto, unless you encounter any problems due to conversion.</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">conversions_to_be_applied</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">conversions_to_be_applied</span> <span class="o">==</span> <span class="s1">&#39;default&#39;</span><span class="p">:</span>
+                <span class="n">conversions_to_be_applied</span> <span class="o">=</span> <span class="n">DEFAULT_CONVERSION_CHAIN</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">conversions_to_be_applied</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;You request decoding of a channel for which no default conversion scheme is present.</span><span class="se">\</span>
+<span class="s2">                        You can apply a temporary conversion scheme by passing a list or tuple of conversion </span><span class="se">\</span>
+<span class="s2">                        key words in the parameter conversions_to_be_applied. When I created this module&quot;</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">conversions_to_be_applied</span> <span class="o">==</span> <span class="s1">&#39;auto&#39;</span><span class="p">:</span>
+                <span class="n">conversions_to_be_applied</span> <span class="o">=</span> <span class="n">JPKSegment</span><span class="o">.</span><span class="n">determine_conversions_automatically</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">channel</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;conversion_parameters&#39;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Unknown string &#39;</span><span class="si">%s</span><span class="s2">&#39; for&quot;</span> <span class="o">%</span> <span class="n">conversions_to_be_applied</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot; function JPKFile.get_decoded_data&#39;s parameter conversions_to_be_applied.</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;Valid strings: &#39;auto&#39; and &#39;default&#39;.</span><span class="se">\n</span><span class="s2">Will now use &#39;auto&#39;.&quot;</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+                <span class="n">conversions_to_be_applied</span> <span class="o">=</span> <span class="n">JPKSegment</span><span class="o">.</span><span class="n">determine_conversions_automatically</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">channel</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;conversion_parameters&#39;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">conversion_parameters</span><span class="p">:</span>
+
+            <span class="n">conversion_keys</span> <span class="o">=</span> <span class="n">conversion_parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">conversions_to_be_applied</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">conversion_keys</span><span class="p">:</span>
+                    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Requested conversion &#39;</span><span class="si">{}</span><span class="s2">&#39; can&#39;t be applied,&#39; &quot;</span>
+                    <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">no parameters for &#39;</span><span class="si">{}</span><span class="s2">&#39; found in jpk header.&quot;</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">conversion_parameters</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;defined&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;false&#39;</span><span class="p">:</span>
+                        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Requested conversion &#39;</span><span class="si">%s</span><span class="s2">&#39; can&#39;t be applied!</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">c</span>
+                        <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;This conversion was specified as not defined</span><span class="se">\n</span><span class="s2">in jpk header file.&quot;</span>
+                        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+            <span class="c1"># if debug:</span>
+            <span class="c1">#     print(&quot;=&quot; * 70)</span>
+            <span class="c1">#     print(&quot;APPLYING CONVERSIONS&quot;)</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">conversions_to_be_applied</span><span class="p">:</span>
+                <span class="c1"># if debug:</span>
+                <span class="c1">#     print(c)</span>
+                <span class="k">if</span> <span class="n">conversion_parameters</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;scaling&#39;</span><span class="p">][</span><span class="s1">&#39;style&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;offsetmultiplier&#39;</span><span class="p">:</span>
+
+                    <span class="n">multiplier</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span>
+                        <span class="n">conversion_parameters</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;scaling&#39;</span><span class="p">][</span><span class="s1">&#39;multiplier&#39;</span><span class="p">])</span>
+                    <span class="n">offset</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span>
+                        <span class="n">conversion_parameters</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;scaling&#39;</span><span class="p">][</span><span class="s1">&#39;offset&#39;</span><span class="p">])</span>
+                    <span class="n">raw</span> <span class="o">=</span> <span class="n">raw</span> <span class="o">*</span> <span class="n">multiplier</span> <span class="o">+</span> <span class="n">offset</span>
+
+                    <span class="n">unit</span> <span class="o">=</span> <span class="n">conversion_parameters</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;scaling&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">][</span><span class="s1">&#39;unit&#39;</span><span class="p">]</span>
+
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;ERROR! Can only handle converters of type &#39;offsetmultiplier&#39; so far.&quot;</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No conversion parameters found for channel &#39;</span><span class="si">{}</span><span class="s2">&#39;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">channel</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">raw</span><span class="p">,</span> <span class="n">unit</span></div>
+
+    <span class="c1">################################################################################################################</span>
+
+<div class="viewcode-block" id="JPKSegment.determine_conversions_automatically"><a class="viewcode-back" href="../../../ot_analysis.extractor.html#ot_analysis.extractor.jpk_extractor.JPKSegment.determine_conversions_automatically">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">determine_conversions_automatically</span><span class="p">(</span><span class="n">conversion_set_dictionary</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Takes all parameters on how to convert some channel&#39;s data read from a header file </span>
+<span class="sd">        to determine the chain of conversion steps automatically.</span>
+
+<span class="sd">        :parameters:</span>
+<span class="sd">            conversion_set_dictionary: dict </span>
+<span class="sd">                Dictionary of &#39;conversion-set parameters as parsed from header file with function `parse_header_file`.</span>
+
+<span class="sd">        :return: list</span>
+<span class="sd">            List of conversion keywords.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Conversions is a list that will hold the conversion keywords.</span>
+        <span class="c1"># When populating this list in the following while loop, the</span>
+        <span class="c1"># order of conversions needs to be reversed. The list is</span>
+        <span class="c1"># initiated in the following line with the last conversion step&#39;s</span>
+        <span class="c1"># keyword as first item.</span>
+        <span class="n">conversions</span> <span class="o">=</span> <span class="p">[</span><span class="n">conversion_set_dictionary</span><span class="p">[</span><span class="s1">&#39;conversions&#39;</span><span class="p">][</span><span class="s1">&#39;default&#39;</span><span class="p">]]</span>
+        <span class="c1"># This is the name of the first conversion to be applied (usually</span>
+        <span class="c1"># from digital back to the analogue potential in voltage).</span>
+        <span class="n">raw_name</span> <span class="o">=</span> <span class="n">conversion_set_dictionary</span><span class="p">[</span><span class="s1">&#39;conversions&#39;</span><span class="p">][</span><span class="s1">&#39;base&#39;</span><span class="p">]</span>
+
+        <span class="c1"># This list should contain keywords of all conversions necessary to</span>
+        <span class="c1"># go from first conversion (`raw_name`) to last (first item in `conversions`)</span>
+        <span class="n">chain_complete</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">conversions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">raw_name</span><span class="p">:</span>
+            <span class="n">chain_complete</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">conversions</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">chain_complete</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">conversions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">previous_conversion</span> <span class="o">=</span> <span class="n">conversion_set_dictionary</span><span class="p">[</span><span class="s1">&#39;conversion&#39;</span><span class="p">][</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;base-calibration-slot&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">previous_conversion</span> <span class="o">==</span> <span class="n">raw_name</span><span class="p">:</span>
+                <span class="c1"># Completion is reached when the name of the preceding converion</span>
+                <span class="c1"># matches that of the first converion.</span>
+                <span class="n">chain_complete</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">conversions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">previous_conversion</span><span class="p">)</span>
+        <span class="n">conversions</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">conversions</span></div></div>
+
+<span class="c1">#####################################################################################################################################</span>
+<span class="c1">#####################################################################################################################################</span>
+
+
+<div class="viewcode-block" id="JPKFile"><a class="viewcode-back" href="../../../ot_analysis.extractor.html#ot_analysis.extractor.jpk_extractor.JPKFile">[docs]</a><span class="k">class</span> <span class="nc">JPKFile</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class to unzip a JPK archive and handle access to its headers and data.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">compressed_repository</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes JPKFile object.</span>
+<span class="sd">        </span>
+<span class="sd">        :parameters: </span>
+<span class="sd">            compressed_repository: str</span>
+<span class="sd">                Filename of archive to read data from.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">jpk_zip</span> <span class="o">=</span> <span class="n">ZipFile</span><span class="p">(</span><span class="n">compressed_repository</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1">#: Dictionary containing parameters read from the top level</span>
+        <span class="c1">#: ``header.properties`` file.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">compressed_repository</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
+            <span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.jpk-nt-force&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="c1">#: Number of segments in archive.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_segments</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1">#: Dictionary containing one JPKSegment instance per segment.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">segments</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1">#: ``None`` if no shared header is present, dictionary containing parameters otherwise.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shared_parameters</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># create list of file names in archive (strings, not only file handles).</span>
+        <span class="n">list_of_filenames</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">jpk_zip</span><span class="o">.</span><span class="n">namelist</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">read_files</span><span class="p">(</span><span class="n">list_of_filenames</span><span class="p">)</span>
+
+    <span class="c1">#################################################################################################################</span>
+
+<div class="viewcode-block" id="JPKFile.read_files"><a class="viewcode-back" href="../../../ot_analysis.extractor.html#ot_analysis.extractor.jpk_extractor.JPKFile.read_files">[docs]</a>    <span class="k">def</span> <span class="nf">read_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">list_of_filenames</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Crawls through list of files in archive and processes them automatically</span>
+<span class="sd">        by name and extension.</span>
+<span class="sd">        Allows you to fill in the attributes of the JPKFile object:</span>
+<span class="sd">        self.parameters</span>
+<span class="sd">        self.headers[&quot;header_global&quot;]</span>
+<span class="sd">        self.segments</span>
+
+<span class="sd">        :parameters:</span>
+<span class="sd">            list_of_filenames: list</span>
+<span class="sd">                list of files in the archive to browse</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># top header should also be present and the first file in the filelist.</span>
+        <span class="n">top_header</span> <span class="o">=</span> <span class="n">list_of_filenames</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span>
+            <span class="n">list_of_filenames</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;header.properties&#39;</span><span class="p">))</span>
+        <span class="n">top_header_f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">jpk_zip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">top_header</span><span class="p">)</span>
+        <span class="n">top_header_content</span> <span class="o">=</span> <span class="n">top_header_f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+        <span class="n">top_header_content</span> <span class="o">=</span> <span class="n">JPKFile</span><span class="o">.</span><span class="n">decode_binary_strings</span><span class="p">(</span><span class="n">top_header_content</span><span class="p">)</span>
+
+        <span class="c1"># parse content of top header file to self.parameters.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s2">&quot;header_global&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">JPKFile</span><span class="o">.</span><span class="n">parse_header_file</span><span class="p">(</span>
+            <span class="n">top_header_content</span><span class="p">,</span> <span class="s2">&quot;header&quot;</span><span class="p">)</span>
+        <span class="c1"># if shared header is present ...</span>
+        <span class="k">if</span> <span class="n">list_of_filenames</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;shared-data/header.properties&quot;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parse_shared_header</span><span class="p">(</span><span class="n">list_of_filenames</span><span class="p">)</span>
+        <span class="c1"># The remaining files should be structured in segments.</span>
+        <span class="c1"># The loop is checking for every file in which segment folder it is, and</span>
+        <span class="c1"># whether it&#39;s a segment header or data file.</span>
+        <span class="c1"># For each new segment folder it encounters, a JPKSegment object is created</span>
+        <span class="c1"># and added to the self.segments dictionary.</span>
+        <span class="c1"># The JPKSegment is then populated by contents of the segment&#39;s</span>
+        <span class="c1"># header and data files.</span>
+        <span class="n">segment</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">list_of_filenames</span><span class="p">:</span>
+            <span class="n">split</span> <span class="o">=</span> <span class="n">fname</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;segments&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">split</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+                    <span class="c1"># `split[1]` should be the segment&#39;s number.</span>
+                    <span class="n">segment_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">split</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="n">segment_number</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_segments</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="n">new_jpksegment</span> <span class="o">=</span> <span class="n">JPKSegment</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shared_parameters</span><span class="p">)</span>
+                        <span class="n">new_jpksegment</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">segment_number</span>
+                        <span class="n">segment</span> <span class="o">=</span> <span class="n">new_jpksegment</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">segments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">num_segments</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">split</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">split</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;segment-header.properties&quot;</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">read_segment_header</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
+                    <span class="c1"># .dat is the extension for data files.</span>
+                    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">split</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">split</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span> <span class="o">==</span> <span class="s2">&quot;.dat&quot;</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">read_segment_data</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="n">split</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span></div>
+            <span class="c1"># else:</span>
+            <span class="c1">#     msg = &quot;Encountered new folder &#39;%s&#39;.\n&quot; % split[0]</span>
+            <span class="c1">#     msg += &quot;Do not know how to handle that.&quot;</span>
+            <span class="c1">#     warnings.warn(msg)</span>
+
+    <span class="c1">#####################################################################################################</span>
+
+<div class="viewcode-block" id="JPKFile.decode_binary_strings"><a class="viewcode-back" href="../../../ot_analysis.extractor.html#ot_analysis.extractor.jpk_extractor.JPKFile.decode_binary_strings">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">decode_binary_strings</span><span class="p">(</span><span class="n">list_of_binary_strings</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Permet de décoder en utf-8 le contenu du header</span>
+
+<span class="sd">        :parameters:</span>
+<span class="sd">            list_of_binary_strings: str</span>
+<span class="sd">                header content</span>
+<span class="sd">            </span>
+<span class="sd">        :return:</span>
+<span class="sd">            list_line_header: list</span>
+<span class="sd">                return a list of header lines readable for manipulation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">list_line_header</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">line_binaire</span> <span class="ow">in</span> <span class="n">list_of_binary_strings</span><span class="p">:</span>
+            <span class="n">list_line_header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line_binaire</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">list_line_header</span></div>
+
+    <span class="c1">#####################################################################################################</span>
+
+<div class="viewcode-block" id="JPKFile.parse_header_file"><a class="viewcode-back" href="../../../ot_analysis.extractor.html#ot_analysis.extractor.jpk_extractor.JPKFile.parse_header_file">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">parse_header_file</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">choice_parse</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        transform the header list into a dictionary for a faster access to the elements</span>
+
+<span class="sd">        :parameters:</span>
+<span class="sd">            content: list</span>
+<span class="sd">                list of decoded header lines</span>
+<span class="sd">            choice_parse: str</span>
+<span class="sd">                name of the header to be parsed</span>
+<span class="sd">        </span>
+<span class="sd">        :return:</span>
+<span class="sd">            header_dict: dict</span>
+<span class="sd">                multi-layer dictionary for faster access to data conversion</span>
+<span class="sd">            header: dict</span>
+<span class="sd">                single layer dictionary for future transformation into Curve object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">header_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">content</span><span class="p">[</span><span class="n">start</span><span class="p">][:</span><span class="mi">2</span><span class="p">])</span> <span class="o">==</span> <span class="s2">&quot;##&quot;</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="n">datestr</span> <span class="o">=</span> <span class="n">content</span><span class="p">[</span><span class="n">start</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="c1"># try:</span>
+        <span class="c1">#     fmt = &#39;%a %b %d %H:%M:%S %Z %Y&#39;</span>
+        <span class="c1">#     t = datetime.strptime(datestr, fmt)</span>
+        <span class="c1"># except:</span>
+        <span class="c1">#     fmt = &#39;%Y-%m-%d %H:%M:%S %Z%z&#39;</span>
+        <span class="c1">#     t = datetime.strptime(datestr, fmt)</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">datestr</span>
+
+        <span class="n">header_dict</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">content</span><span class="p">[</span><span class="n">start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]:</span>
+            <span class="n">key_header</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">choice_parse</span> <span class="o">==</span> <span class="s2">&quot;header&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+                    <span class="n">key_header</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;header&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+                        <span class="s2">&quot;.force-settings&quot;</span><span class="p">,</span> <span class="s2">&quot;settings&quot;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">key_header</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;force-scan-series.&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">choice_parse</span> <span class="o">==</span> <span class="s2">&quot;shared&quot;</span><span class="p">:</span>
+                <span class="n">key_header</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;lcd-info.&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">choice_parse</span> <span class="o">==</span> <span class="s2">&quot;segment&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;force-segment-header.environment&quot;</span><span class="p">):</span>
+                    <span class="n">key_header</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+                        <span class="s2">&quot;force-segment-header.environment.&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;force-segment-header&quot;</span><span class="p">):</span>
+                    <span class="n">key_header</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;force-segment-header&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">key_header</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;.settings.segment-settings.&quot;</span><span class="p">):</span>
+                        <span class="n">key_header</span> <span class="o">=</span> <span class="n">key_header</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.settings.&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;channel&quot;</span><span class="p">):</span>
+                    <span class="n">key_header</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;channel.&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">split_key</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">header_dict</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">split_key</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">split_key</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+                        <span class="n">d</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">d</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                        <span class="n">d</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">split_key</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">header</span><span class="p">[</span><span class="n">key_header</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">return</span> <span class="n">header_dict</span><span class="p">,</span> <span class="n">header</span></div>
+
+    <span class="c1">####################################################################################################</span>
+
+<div class="viewcode-block" id="JPKFile.parse_shared_header"><a class="viewcode-back" href="../../../ot_analysis.extractor.html#ot_analysis.extractor.jpk_extractor.JPKFile.parse_shared_header">[docs]</a>    <span class="k">def</span> <span class="nf">parse_shared_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">list_of_filenames</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        parsing of the conversion and calibration file included in the archive</span>
+
+<span class="sd">        :parameters:</span>
+<span class="sd">            list_of_filenames: list</span>
+<span class="sd">                list of files in the archive</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># ... set this to True,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shared_parameters</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c1"># and remove it from list of files.</span>
+        <span class="n">shared_header</span> <span class="o">=</span> <span class="n">list_of_filenames</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span>
+            <span class="n">list_of_filenames</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;shared-data/header.properties&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">shared_header_f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">jpk_zip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">shared_header</span><span class="p">)</span>
+        <span class="n">shared_header_content</span> <span class="o">=</span> <span class="n">shared_header_f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+        <span class="n">shared_header_content</span> <span class="o">=</span> <span class="n">JPKFile</span><span class="o">.</span><span class="n">decode_binary_strings</span><span class="p">(</span>
+            <span class="n">shared_header_content</span><span class="p">)</span>
+        <span class="c1"># Parse header content to dictionary.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shared_parameters</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s2">&quot;shared&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">JPKFile</span><span class="o">.</span><span class="n">parse_header_file</span><span class="p">(</span>
+            <span class="n">shared_header_content</span><span class="p">,</span> <span class="s2">&quot;shared&quot;</span><span class="p">)</span>
+        <span class="c1"># print(self.shared_parameters)</span>
+        <span class="n">nb_features</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s2">&quot;shared&quot;</span><span class="p">][</span><span class="s1">&#39;lcd-infos.count&#39;</span><span class="p">])</span><span class="o">-</span><span class="mi">1</span>
+        <span class="n">calibrations</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s2">&quot;shared&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">index_feature</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nb_features</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">name_feature</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s2">&quot;shared&quot;</span><span class="p">][</span><span class="nb">str</span><span class="p">(</span>
+                    <span class="n">index_feature</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.channel.name&#39;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="n">index_feature</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.conversion-set.conversion.distance.scaling.multiplier&#39;</span><span class="p">:</span>
+                    <span class="n">k</span> <span class="o">=</span> <span class="n">name_feature</span> <span class="o">+</span> <span class="s1">&#39;_sensitivity&#39;</span>
+                    <span class="n">calibrations</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+                <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="n">index_feature</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.conversion-set.conversion.force.scaling.multiplier&#39;</span><span class="p">:</span>
+                    <span class="n">k</span> <span class="o">=</span> <span class="n">name_feature</span> <span class="o">+</span> <span class="s1">&#39;_stiffness&#39;</span>
+                    <span class="n">calibrations</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;calibrations&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">calibrations</span></div>
+
+    <span class="c1">#####################################################################################################</span>
+
+<div class="viewcode-block" id="JPKFile.read_segment_header"><a class="viewcode-back" href="../../../ot_analysis.extractor.html#ot_analysis.extractor.jpk_extractor.JPKFile.read_segment_header">[docs]</a>    <span class="k">def</span> <span class="nf">read_segment_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">segment</span><span class="p">,</span> <span class="n">fname</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Decodes and parses the header files of the different segments of the archive. </span>
+<span class="sd">        Allows to set up the &quot;Time&quot; and &quot;Distance&quot; columns of the curve</span>
+
+<span class="sd">        :parameters:</span>
+<span class="sd">            segment: object</span>
+<span class="sd">                object JPK Segment created</span>
+<span class="sd">            fname: str(file)</span>
+<span class="sd">                header file to decode and parse</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">header_f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">jpk_zip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+        <span class="n">header_content</span> <span class="o">=</span> <span class="n">header_f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+        <span class="n">header_content</span> <span class="o">=</span> <span class="n">JPKFile</span><span class="o">.</span><span class="n">decode_binary_strings</span><span class="p">(</span><span class="n">header_content</span><span class="p">)</span>
+        <span class="n">segment</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span> <span class="n">segment</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="n">JPKFile</span><span class="o">.</span><span class="n">parse_header_file</span><span class="p">(</span>
+            <span class="n">header_content</span><span class="p">,</span> <span class="s2">&quot;segment&quot;</span><span class="p">)</span>
+        <span class="n">num_points</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>
+            <span class="n">segment</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;force-segment-header&#39;</span><span class="p">][</span><span class="s1">&#39;num-points&#39;</span><span class="p">])</span>
+        <span class="n">t_end</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">segment</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;force-segment-header&#39;</span><span class="p">][</span><span class="s1">&#39;duration&#39;</span><span class="p">])</span>
+        <span class="n">t_step</span> <span class="o">=</span> <span class="n">t_end</span> <span class="o">/</span> <span class="n">num_points</span>
+        <span class="c1"># segment.data[&#39;t&#39;] = (np.arange(0.0, t_end, t_step), {&#39;unit&#39;: &#39;s&#39;})</span>
+        <span class="n">segment</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span>
+            <span class="mf">0.0</span><span class="p">,</span> <span class="n">t_end</span><span class="p">,</span> <span class="n">num_points</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">),</span> <span class="p">{</span><span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;s&#39;</span><span class="p">})</span>
+        <span class="k">if</span> <span class="n">segment</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;force-segment-header&#39;</span><span class="p">][</span><span class="s1">&#39;settings&#39;</span><span class="p">][</span><span class="s1">&#39;style&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;motion&#39;</span><span class="p">:</span>
+            <span class="n">distance_start</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">distance_step</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="s1">&#39;distance&#39;</span> <span class="ow">in</span> <span class="n">segment</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;channel&#39;</span><span class="p">]:</span>
+                <span class="n">distance_start</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span>
+                    <span class="n">segment</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;channel&#39;</span><span class="p">][</span><span class="s1">&#39;distance&#39;</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;start&#39;</span><span class="p">])</span>
+                <span class="n">distance_step</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span>
+                    <span class="n">segment</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;channel&#39;</span><span class="p">][</span><span class="s1">&#39;distance&#39;</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;step&#39;</span><span class="p">])</span>
+                <span class="n">distance_end</span> <span class="o">=</span> <span class="n">distance_start</span> <span class="o">+</span> <span class="n">distance_step</span> <span class="o">*</span> <span class="n">num_points</span>
+                <span class="n">segment</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span>
+                    <span class="n">distance_start</span><span class="p">,</span> <span class="n">distance_end</span><span class="p">,</span> <span class="n">num_points</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">),</span> <span class="p">{</span><span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;m&#39;</span><span class="p">})</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">length</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span>
+                    <span class="n">segment</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;force-segment-header&#39;</span><span class="p">][</span><span class="s1">&#39;settings&#39;</span><span class="p">][</span><span class="s1">&#39;segment-settings&#39;</span><span class="p">][</span><span class="s1">&#39;length&#39;</span><span class="p">])</span>
+                <span class="n">duration</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span>
+                    <span class="n">segment</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;force-segment-header&#39;</span><span class="p">][</span><span class="s1">&#39;settings&#39;</span><span class="p">][</span><span class="s1">&#39;segment-settings&#39;</span><span class="p">][</span><span class="s1">&#39;duration&#39;</span><span class="p">])</span>
+                <span class="n">speed</span> <span class="o">=</span> <span class="n">length</span><span class="o">/</span><span class="n">duration</span>
+                <span class="n">distance</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">time</span> <span class="ow">in</span> <span class="n">segment</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="n">segment</span><span class="o">.</span><span class="n">index</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">segment_previous</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">segment</span><span class="o">.</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+                        <span class="n">last_distance</span> <span class="o">=</span> <span class="n">segment_previous</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="nb">len</span><span class="p">(</span>
+                            <span class="n">segment_previous</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                        <span class="n">distance</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">last_distance</span> <span class="o">-</span> <span class="n">speed</span><span class="o">*</span><span class="n">time</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">distance</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">speed</span><span class="o">*</span><span class="n">time</span><span class="p">)</span>
+                <span class="n">segment</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">distance</span><span class="p">),</span> <span class="p">{</span><span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;m&#39;</span><span class="p">})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">distance_stable</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="k">if</span> <span class="s1">&#39;distance&#39;</span> <span class="ow">in</span> <span class="n">segment</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;channel&#39;</span><span class="p">]:</span>
+                <span class="n">distance_stable</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span>
+                    <span class="n">segment</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;channel&#39;</span><span class="p">][</span><span class="s1">&#39;distance&#39;</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">segment</span><span class="o">.</span><span class="n">index</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">segment_previous</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">segment</span><span class="o">.</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+                    <span class="n">distance_stable</span> <span class="o">=</span> <span class="n">segment_previous</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="nb">len</span><span class="p">(</span>
+                        <span class="n">segment_previous</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">list_distance_pause</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">num_points</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">distance_stable</span><span class="p">)</span>
+            <span class="n">segment</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">list_distance_pause</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;m&#39;</span><span class="p">})</span>
+        <span class="k">if</span> <span class="bp">self</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">links</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">JPKFile</span><span class="o">.</span><span class="n">find_links_in_local_parameters</span><span class="p">(</span><span class="n">links</span><span class="p">,</span>
+                                                   <span class="n">segment</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span>
+                                                   <span class="bp">self</span><span class="o">.</span><span class="n">shared_parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="p">[])</span>
+            <span class="n">JPKFile</span><span class="o">.</span><span class="n">replace_links</span><span class="p">(</span><span class="n">links</span><span class="p">,</span> <span class="n">segment</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span>
+                                  <span class="bp">self</span><span class="o">.</span><span class="n">shared_parameters</span><span class="p">)</span></div>
+
+    <span class="c1">##########################################################################################################################</span>
+
+<div class="viewcode-block" id="JPKFile.read_segment_data"><a class="viewcode-back" href="../../../ot_analysis.extractor.html#ot_analysis.extractor.jpk_extractor.JPKFile.read_segment_data">[docs]</a>    <span class="k">def</span> <span class="nf">read_segment_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">segment</span><span class="p">,</span> <span class="n">split</span><span class="p">,</span> <span class="n">fname</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        decodes the encrypted data in hexadecimal for each column of the segment dataframe</span>
+
+<span class="sd">        :parameters:</span>
+<span class="sd">            segment:object</span>
+<span class="sd">                object JPK Segment created</span>
+<span class="sd">            split: str</span>
+<span class="sd">                name of the column thanks to the name of the file</span>
+<span class="sd">            fname: str</span>
+<span class="sd">                file to analyze and decode</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">channel_label</span> <span class="o">=</span> <span class="n">split</span><span class="p">[</span><span class="mi">3</span><span class="p">][:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>
+        <span class="n">data_f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">jpk_zip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">data_f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="c1"># if debug:</span>
+        <span class="c1">#     print(segment_number, channel_label)</span>
+        <span class="c1"># if no shared header was present, this should work</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">shared_parameters</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dtype</span> <span class="o">=</span> <span class="n">segment</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;channel&#39;</span><span class="p">][</span><span class="n">channel_label</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
+        <span class="c1"># otherwise, the chain of keywords is a bit different:</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># print(segment.parameters[&#39;channel&#39;])</span>
+            <span class="n">dtype</span> <span class="o">=</span> <span class="n">segment</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;channel&#39;</span><span class="p">][</span><span class="n">channel_label</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
+        <span class="n">encoder_parameters</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">shared_parameters</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;data&#39;</span> <span class="ow">in</span> <span class="n">segment</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;channel&#39;</span><span class="p">][</span><span class="n">channel_label</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="s1">&#39;encoder&#39;</span> <span class="ow">in</span> <span class="n">segment</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;channel&#39;</span><span class="p">][</span><span class="n">channel_label</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]:</span>
+                    <span class="n">encoder_parameters</span> <span class="o">=</span> <span class="n">segment</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;channel&#39;</span><span class="p">][</span><span class="n">channel_label</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;encoder&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;encoder&#39;</span> <span class="ow">in</span> <span class="n">segment</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;channel&#39;</span><span class="p">][</span><span class="n">channel_label</span><span class="p">]:</span>
+                <span class="n">encoder_parameters</span> <span class="o">=</span> <span class="n">segment</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;channel&#39;</span><span class="p">][</span><span class="n">channel_label</span><span class="p">][</span><span class="s1">&#39;encoder&#39;</span><span class="p">]</span>
+
+        <span class="n">conversion_parameters</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="s1">&#39;conversion-set&#39;</span> <span class="ow">in</span> <span class="n">segment</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;channel&#39;</span><span class="p">][</span><span class="n">channel_label</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="s1">&#39;conversion&#39;</span> <span class="ow">in</span> <span class="n">segment</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;channel&#39;</span><span class="p">][</span><span class="n">channel_label</span><span class="p">][</span><span class="s1">&#39;conversion-set&#39;</span><span class="p">]:</span>
+                <span class="n">conversion_parameters</span> <span class="o">=</span> <span class="n">segment</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;channel&#39;</span><span class="p">][</span><span class="n">channel_label</span><span class="p">][</span><span class="s1">&#39;conversion-set&#39;</span><span class="p">]</span>
+        <span class="c1"># if not encoder_parameters:</span>
+        <span class="c1">#     warnings.warn(&quot;Did not find encoder parameters for channel {}!&quot;.format(split[3][:-4]))</span>
+        <span class="c1"># if not conversion_parameters:</span>
+        <span class="c1">#     warnings.warn(&quot;Did not find conversion parameters for channel {}!&quot;.format(split[3][:-4]))</span>
+        <span class="n">num_points</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>
+            <span class="n">segment</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;force-segment-header&#39;</span><span class="p">][</span><span class="s1">&#39;num-points&#39;</span><span class="p">])</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">JPKFile</span><span class="o">.</span><span class="n">extract_data</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">num_points</span><span class="p">)</span>
+        <span class="c1"># Transformation en dictionnaire avec les paramètres d&#39;encodage</span>
+        <span class="n">segment</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">channel_label</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;encoder_parameters&#39;</span><span class="p">:</span> <span class="n">encoder_parameters</span><span class="p">,</span>
+                                              <span class="s1">&#39;conversion_parameters&#39;</span><span class="p">:</span> <span class="n">conversion_parameters</span><span class="p">})</span></div>
+
+    <span class="c1">############################################################################################################################</span>
+<div class="viewcode-block" id="JPKFile.extract_data"><a class="viewcode-back" href="../../../ot_analysis.extractor.html#ot_analysis.extractor.jpk_extractor.JPKFile.extract_data">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">extract_data</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">num_points</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts data from contents of .dat files in the JPKArchive to</span>
+<span class="sd">        python-understandable formats.</span>
+<span class="sd">        This function requires the binary `content`, the `dtype` of the </span>
+<span class="sd">        binary content as read from the appropiate header file, and the</span>
+<span class="sd">        number of points as specified in the header file to double check</span>
+<span class="sd">        the conversion.</span>
+
+<span class="sd">        :parameters:</span>
+<span class="sd">            content: str</span>
+<span class="sd">                Binary content of a .dat file.</span>
+<span class="sd">            dtype: str</span>
+<span class="sd">                Data type as read from heade file.</span>
+<span class="sd">            num_points: int</span>
+<span class="sd">                Expected number of points encoded in binary content.</span>
+<span class="sd">        :return: </span>
+<span class="sd">            data: list</span>
+<span class="sd">                Numpy array containing digital (non-physical, unconverted) data.&quot;&quot;&quot;</span>
+        <span class="c1">#: Dictionary assigning item length (in .dat files) and struckt.unpack abbreviation</span>
+        <span class="c1">#: to the keys used in header files (.properties).</span>
+        <span class="n">data_types</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;short&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">),</span>
+                      <span class="s1">&#39;short-data&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">),</span>
+                      <span class="s1">&#39;unsignedshort&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">),</span>
+                      <span class="s1">&#39;integer-data&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">),</span>
+                      <span class="s1">&#39;signedinteger&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">),</span>
+                      <span class="s1">&#39;float-data&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">)}</span>
+        <span class="n">point_length</span><span class="p">,</span> <span class="n">type_code</span> <span class="o">=</span> <span class="n">data_types</span><span class="p">[</span><span class="n">dtype</span><span class="p">]</span>
+
+        <span class="n">n_entries</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="p">)</span> <span class="o">//</span> <span class="n">point_length</span>
+        <span class="k">if</span> <span class="n">num_points</span> <span class="o">!=</span> <span class="n">n_entries</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;ERROR! Number of extracted data points is </span><span class="si">%i</span><span class="s2">,&quot;</span> <span class="o">%</span> <span class="n">n_entries</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot; and does not match the number of present data points </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">num_points</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot; as read from the segment&#39;s header file.&quot;</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">unpack_from</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;!</span><span class="si">{</span><span class="n">num_points</span><span class="si">}{</span><span class="n">type_code</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">content</span><span class="p">))</span><span class="c1"># data decoding</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>  <span class="c1"># Transformation from list to matrix</span>
+        <span class="k">return</span> <span class="n">data</span></div>
+        
+
+    <span class="c1">###########################################################################################################</span>
+
+<div class="viewcode-block" id="JPKFile.find_links_in_local_parameters"><a class="viewcode-back" href="../../../ot_analysis.extractor.html#ot_analysis.extractor.jpk_extractor.JPKFile.find_links_in_local_parameters">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">find_links_in_local_parameters</span><span class="p">(</span><span class="n">list_of_all_links</span><span class="p">,</span> <span class="n">parameter_subset</span><span class="p">,</span> <span class="n">link_keys</span><span class="p">,</span> <span class="n">chain</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Allows to find the link between the segment header and the &quot;shared&quot; calibration file</span>
+
+<span class="sd">        :parameters:</span>
+<span class="sd">            list_of_all_links: list</span>
+<span class="sd">                list with links, it is filled by recursion</span>
+<span class="sd">            parameter_subset: dict</span>
+<span class="sd">                segment header dictionary</span>
+<span class="sd">            link_keys: list</span>
+<span class="sd">                keys to the shared dictionary</span>
+<span class="sd">            chain: list</span>
+<span class="sd">                list of occurrences (links)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">parameter_subset</span><span class="p">:</span>
+            <span class="n">copy_chain</span> <span class="o">=</span> <span class="n">chain</span><span class="p">[:]</span>
+            <span class="n">copy_chain</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">link_keys</span> <span class="ow">and</span> <span class="n">key</span> <span class="o">!=</span> <span class="s2">&quot;date&quot;</span><span class="p">:</span>
+                <span class="c1"># print(&#39;################## &#39;, key)</span>
+                <span class="n">list_of_all_links</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">copy_chain</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parameter_subset</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="n">JPKFile</span><span class="o">.</span><span class="n">find_links_in_local_parameters</span><span class="p">(</span>
+                        <span class="n">list_of_all_links</span><span class="p">,</span> <span class="n">parameter_subset</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">link_keys</span><span class="p">,</span> <span class="n">copy_chain</span><span class="p">)</span></div>
+            <span class="c1"># print(list_of_all_links)</span>
+
+    <span class="c1">#############################################################################################################</span>
+
+<div class="viewcode-block" id="JPKFile.replace_links"><a class="viewcode-back" href="../../../ot_analysis.extractor.html#ot_analysis.extractor.jpk_extractor.JPKFile.replace_links">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">replace_links</span><span class="p">(</span><span class="n">links</span><span class="p">,</span> <span class="n">local_parameters</span><span class="p">,</span> <span class="n">shared_parameters</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Allows you to retrieve the channel number corresponding to the associated column to include it in the &quot;shared&quot; </span>
+<span class="sd">        directory and associate the information for the conversion.</span>
+<span class="sd">        Transformation of the &quot;shared&quot; dictionary for data conversion</span>
+
+<span class="sd">        :parameters:</span>
+<span class="sd">            links: list</span>
+<span class="sd">                list of links retrieved by the find_links_in_local_parameters() function</span>
+<span class="sd">            local_parameters: dict</span>
+<span class="sd">                dictionary header segement</span>
+<span class="sd">            shared_parameters: dict</span>
+<span class="sd">                &quot;shared&quot; multilayer dictionary</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">chain</span> <span class="ow">in</span> <span class="n">links</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">local_parameters</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">chain</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">d</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="c1"># if debug:</span>
+            <span class="c1">#     print((&quot;keys_before = &quot;, d.keys()))</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">chain</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])[</span><span class="s1">&#39;*&#39;</span><span class="p">]</span>
+            <span class="n">JPKFile</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">shared_parameters</span><span class="p">[</span><span class="n">chain</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]][</span><span class="n">index</span><span class="p">])</span></div>
+            <span class="c1"># if debug:</span>
+            <span class="c1">#     print((&quot;keys_shared = &quot;, shared_parameters[chain[-1]][index].keys()))</span>
+            <span class="c1">#     print((&quot;keys_after = &quot;, d.keys()))</span>
+
+    <span class="c1">#############################################################################################################</span>
+
+<div class="viewcode-block" id="JPKFile.merge"><a class="viewcode-back" href="../../../ot_analysis.extractor.html#ot_analysis.extractor.jpk_extractor.JPKFile.merge">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">chain</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Allows to merge dictionaries according to their keys and according to the type of their values</span>
+
+<span class="sd">        :parameters:</span>
+<span class="sd">            a: dict</span>
+<span class="sd">               dictionary 1</span>
+<span class="sd">            b: dict</span>
+<span class="sd">                dictionary 2 </span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">chain</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">chain</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">b</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="n">JPKFile</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">chain</span> <span class="o">+</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)])</span>
+                <span class="k">elif</span> <span class="n">a</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="n">b</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                    <span class="k">pass</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Conflict at </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span>
+                                    <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">chain</span> <span class="o">+</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)]))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">a</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="n">key</span><span class="p">]</span></div></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">PATH_FILE</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data_test/jpk_nt_force/&quot;</span><span class="p">)</span>
+    <span class="n">FILE</span> <span class="o">=</span> <span class="n">PATH_FILE</span> <span class="o">/</span> <span class="s2">&quot;b3c3-2021.06.07-14.50.58.217.jpk-nt-force&quot;</span>
+
+    <span class="n">JPK</span> <span class="o">=</span> <span class="n">JPKFile</span><span class="p">(</span><span class="n">FILE</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Thierry GALLIANO, Pierre-Henri PUECH, Laurent LIMOZIN, Guillaume GAY (LAI, Bio Imaging).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
