@@ -1,6 +1,6 @@
 from os import sep
 import logging
-from __init__ import DATA_DIR
+from .__init__ import DATA_DIR
 from datetime import date, datetime
 from pathlib import Path
 

@@ -1441,7 +1441,6 @@ class Controller:
         ax1 = fig.add_subplot(gs[0, 0])
         ax2 = fig.add_subplot(gs[0, 1])
         color_dict = {'AD': 'red', 'FTU': 'green', 'ITU': 'blue'}
-        artist_plot = []
         for curve in self.dict_curve.values():
             if curve.features['type'] in ('AD', 'FTU', 'ITU'):
                 text_annot=curve.file + '/page ' + str(list(self.dict_curve.values()).index(curve)+1)
@@ -1451,23 +1450,17 @@ class Controller:
                                                                     curve.features['jump_force_end_pull (pN)']), xytext=(-60, 10),
                                                     textcoords="offset points", bbox=dict(boxstyle="round", fc="w"), visible=False))
                 
-                if 'slope_fit_classification_transition' in curve.features:
-                    ax2.plot(curve.features["slope_fit_classification_transition"],
+                if 'slope_fit_classification_transition (pN/nm)' in curve.features:
+                    ax2.plot(curve.features["slope_fit_classification_transition (pN/nm)"],
                                 curve.features['jump_force_end_pull (pN)'], marker='o', color=color_dict[curve.features['type']],
                                 picker=True, label=curve.file)
-                elif 'slope_fitted_classification_max_transition' in curve.features:
-                    ax2.plot(curve.features["slope_fitted_classification_max_transition"],
+                elif 'slope_fitted_classification_max_transition (pN/nm)' in curve.features:
+                    ax2.plot(curve.features["slope_fitted_classification_max_transition (pN/nm)"],
                                 curve.features['jump_force_end_pull (pN)'], marker='o', color=color_dict[curve.features['type']],
                                 picker=True, label=curve.file)
-                annotations_ax2.append(ax2.annotate(text_annot, xy=(curve.features["slope_fitted_classification_max_transition"],
+                annotations_ax2.append(ax2.annotate(text_annot, xy=(curve.features["slope_fitted_classification_max_transition (pN/nm)"],
                                                                     curve.features['jump_force_end_pull (pN)']), xytext=(-100, 10),
                                                     textcoords="offset points", bbox=dict(boxstyle="round", fc="w"), visible=False))
-                
-                # h, l = ax1.get_legend())
-                # print(h)
-                # print(l)
-        # max_xlim = ax2.get_xlim()[1]
-        # ax2.set_xlim(-max_xlim, max_xlim)
         ax1.axvline(self.view.methods['jump_distance'], ls='-.')
         ax1.axhline(self.view.methods['jump_force'], ls='-.')
         ax2.axvline(0.025, ls='-.')

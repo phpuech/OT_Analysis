@@ -802,7 +802,7 @@ class Curve:
             distance_data = np.abs(segment.corrected_data['distance'])
         f_parameters = curve_fit(
             Curve.linear_fit, distance_data[index_start:index_end], y_smooth_pull[index_start:index_end])
-        self.features["slope_" + name_fit] = f_parameters[0][0]
+        self.features["slope_" + name_fit + " (pN/nm)"] = f_parameters[0][0]
         fitted_classification = Curve.linear_fit(
             distance_data[index_start:index_end], f_parameters[0][0], f_parameters[0][1])
         self.graphics[name_fit] = fitted_classification
@@ -941,7 +941,7 @@ class Curve:
         else:
             index_force_max = force_data.argmax()
             if type_curve == "ITU":
-                self.features['transition_point'] = {'index': len(force_data)-1, 'value': force_data[len(force_data)-1]}
+                self.features['transition_point'] = {'index': len(force_data)-1, 'value (pN)': force_data[len(force_data)-1]}
                 index_start = self.features['transition_point']['index'] - 2000
                 index_end = self.features['transition_point']['index']
                 self.fit_linear_classification(
@@ -950,7 +950,7 @@ class Curve:
                 jump_distance_end_pull = distance_data[self.features['transition_point']['index']] - \
                             distance_data[index_force_max]
                 jump_force_end_pull = ""
-                if self.features['transition_point']['value'] < force_data[index_force_max]:
+                if self.features['transition_point']['value (pN)'] < force_data[index_force_max]:
                     jump_force_end_pull = force_data[index_force_max] - \
                         force_data[self.features['transition_point']['index']]
                 else:
@@ -1031,7 +1031,7 @@ class Curve:
             self.features['point_return_endline'] = {
                 'index': 'NaN', 'value': 'NaN'}
             self.features['transition_point'] = {
-                'index': 'NaN', 'value': 'NaN'}
+                'index': 'NaN', 'value (pN)': 'NaN'}
         return error
 
     ###############################################################################################

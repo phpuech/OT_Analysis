@@ -171,13 +171,81 @@ Thanks to the scatter plots, the good respect of the thresholds given to the ana
 
 ## Save output + method
 
-After performing the analysis and making corrections through supervision, we can save our results 
-the name is output: output_{date}_{time}.csv
-the method namefile is: methods_date_time.tsv
+After performing the analysis and making corrections  through supervision, we can save our results <br>
+the name is output: output_{date}_{time}.csv <br>
+the method namefile is: methods_date_time.tsv <br>
 
 ![Screenshot](./pictures/19save.png)
 
 <img src="./pictures/20modale_of save.png">
+
+The output file is a csv file with 68 columns described in the software REDAME.
+* treat_supervised
+* automatic_type
+* type
+* automatic_AL
+* AL
+* automatic_AL_axe
+* optical_state
+* model
+* Date
+* Hour
+* condition
+* drug
+* tolerance
+* bead
+* cell
+* couple
+* main_axis
+* stiffness (N/m)
+* theorical_contact_force (N)
+* theorical_distance_Press (m)
+* theorical_speed_Press (m/s)
+* thoerical_freq_Press (Hz)
+* time_segment_pause_Wait1 (s)
+* theorical_distance_Pull (m)
+* theorical_speed_Pull (m/s)
+* thoerical_freq_Pull (Hz)
+* baseline_origin_press (N)
+* baseline_corrected_press (pN)
+* std_origin_press (N)
+* std_corrected_press (pN)
+* slope (pN/nm)
+* error (pN/nm)
+* contact_point_index
+* contact_point_value (pN)
+* force_min_press_index
+* force_min_press_value (pN)
+* force_min_curve_index
+* force_min_curve_value (pN)
+* time_min_curve_value (s)
+* point_release_index
+* point_release_value (pN)
+* force_max_pull_index
+* force_max_pull_value (pN)
+* force_max_curve_index
+* force_max_curve_value (pN)
+* transition_point_index
+* transition_point_value (pN)
+* point_return_endline_index
+* point_return_endline_value (pN)
+* Pente (pN/nm)
+* jump_force_start_pull (pN)
+* jump_force_end_pull (pN)
+* jump_nb_points_start
+* jump_nb_points-end
+* jump_time_start_pull (s)
+* jump_time_end_pull (s)
+* jump_distance_start_pull (nm)
+* slope_fitted_classification_max (pN/nm)
+* slope_fitted_classification_release (pN/nm)
+* slope_fitted_classification_max_transition (pN/nm)
+* slope_fitted_classification_return_endline (pN/nm)
+* jump_distance_end_pull (nm)
+* relative_path
+* valid_fit_press
+* valid_fit_pull
+
 
 
 
