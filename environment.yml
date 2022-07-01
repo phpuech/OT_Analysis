@@ -1,4 +1,4 @@
-name: otanalysis
+name: ot_analysis
 channels:
 - conda-forge
 
@@ -12,5 +12,5 @@ dependencies:
 - qtpy
 - pip:
     - supyr-struct
-    - OTAnalysis
+    - OT_Analysis
 # conda-feedstock // conda-forge

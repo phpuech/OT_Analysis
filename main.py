@@ -9,8 +9,8 @@ import os
 import sys
 from pathlib import Path
 from PyQt5.QtWidgets import QApplication
-from otanalysis.view.mainview import View
-from otanalysis.controller.controller import Controller
+from ot_analysis.view.mainview import View
+from ot_analysis.controller.controller import Controller
 
 
 def main():

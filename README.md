@@ -1,6 +1,8 @@
 ![Python 3.8.5](https://img.shields.io/badge/Python-3.8.5-blue.svg)
+![PyQt 5.15.0](https://img.shields.io/badge/PyQt-5.15.0-green.svg)
+![License GPL](https://img.shields.io/badge/GNU-GPL3-red.svg)
 
-OTAnalysis
+OT_Analysis
 ==========
 
 # Tool for managing the results of optical tweezers
@@ -91,7 +93,7 @@ conda install pip
 ```
 After for all:
 ```
-python -m pip install OTAnalysis
+python -m pip install OT_Analysis
 ```
 
 Installation by conda environment already create
@@ -104,7 +106,7 @@ conda env create -f environment.yml
 # Launch project
 In a termnial, run (from anywhere):
 ```
-otanalysis or OTAnalysis
+ot_analysis or OT_Analysis
 ```
 
 # Documentation
@@ -116,7 +118,7 @@ make html
 
 ## Visualization
 ```
-firefox https://otanalysis.readthedocs.io/en/latest/index.html
+firefox https://ot_analysis.readthedocs.io/en/latest/index.html
 ```
 
 ## Explanation output file
@@ -281,7 +283,7 @@ if we want to add a new feature after analysis but on the object *curve :
 
  ## Adapt input
  The input text file must have a global header, a calibration part, segment headers and data
- ![Screenshot](./pictures/structure_file_text.png)
+![Screenshot](./pictures/structure_file_text.png)
  
  If your data do not have a force (xsignal1, ysignal1, zsignal1), time (seriesTime) and distance column:
 - You will have to implement methods in the specific curve object of your data

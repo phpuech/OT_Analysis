@@ -20,7 +20,7 @@ max-branches = 20
 max-locals = 60
 max-nested-blocks = 10
 max-args = 10
-init-hook='import sys; sys.path.append("src/otanalysis")'
+init-hook='import sys; sys.path.append("ot_analysis")'
 extension-pkg-whitelist=['PyQt5']
 disable=[
     'too-many-instance-attributes',

@@ -6,7 +6,7 @@
 Test Curve
 """
 from os import sep
-from otanalysis.controller.controller import Controller
+from ot_analysis.controller.controller import Controller
 
 
 class TestCurve:
