@@ -46,7 +46,7 @@
 <li class="toctree-l1"><a class="reference internal" href="readme_link.html#launch-project">Launch project</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readme_link.html#documentation">Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_doc.html">DOC_USER</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user_doc.html#center-ot-analysis-a-software-for-rich-analysis-of-force-curves-from-optical-tweezer-with-living-cells-center"><span class="raw-html-m2r"><center> OT-Analysis : a software for rich analysis of force curves from optical tweezer (with living cells)</center></span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_doc.html#center-ot-analysis-a-software-for-rich-analysis-of-force-curves-when-probing-living-cells-with-optical-tweezers-center"><span class="raw-html-m2r"><center> OT-Analysis: a software for rich analysis of force curves when probing living cells with optical tweezers </center></span></a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">OT_Analysis</a></li>
 </ul>
 
@@ -83,6 +83,50 @@
 <section id="tool-for-managing-the-results-of-optical-tweezers">
 <h1>Tool for managing the results of optical tweezers<a class="headerlink" href="#tool-for-managing-the-results-of-optical-tweezers" title="Permalink to this heading"></a></h1>
 <p>Tool for extracting, analyzing and classifying optical tweezer data curves</p>
+</section>
+<section id="install-miniconda-create-conda-environment">
+<h1>Install MiniConda &amp;&amp; Create conda environment<a class="headerlink" href="#install-miniconda-create-conda-environment" title="Permalink to this heading"></a></h1>
+<p>For the installation of the library please install conda and create a virtual environment to avoid library conflicts (conflict between Spyder and PyQt5 observed)</p>
+<p>For OS is Linux or Mac</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">repo</span><span class="o">.</span><span class="n">anaconda</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">miniconda</span><span class="o">/</span><span class="n">Miniconda3</span><span class="o">-</span><span class="n">latest</span><span class="o">-</span><span class="n">Linux</span><span class="o">-</span><span class="n">x86_64</span><span class="o">.</span><span class="n">sh</span>
+<span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="n">Miniconda3</span><span class="o">-</span><span class="n">latest</span><span class="o">-</span><span class="n">Linux</span><span class="o">-</span><span class="n">x86_64</span><span class="o">.</span><span class="n">sh</span>
+<span class="o">./</span><span class="n">Miniconda3</span><span class="o">-</span><span class="n">latest</span><span class="o">-</span><span class="n">Linux</span><span class="o">-</span><span class="n">x86_64</span><span class="o">.</span><span class="n">sh</span>
+<span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="s2">&quot;newenv&quot;</span>
+<span class="n">conda</span> <span class="n">activate</span> <span class="n">newenv</span>
+<span class="n">source</span> <span class="o">.</span><span class="n">bashrc</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="n">pip</span>
+</pre></div>
+</div>
+<p>Otherwise OS is Windows:
+Download conda at this address depending on your system OS versions: <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">https://docs.conda.io/en/latest/miniconda.html</a>
+Go to the conda prompt</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="s2">&quot;newenv&quot;</span>
+<span class="n">conda</span> <span class="n">activate</span> <span class="s2">&quot;newenv&quot;</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="n">pip</span>
+</pre></div>
+</div>
+</section>
+<section id="install-package">
+<h1>Install package<a class="headerlink" href="#install-package" title="Permalink to this heading"></a></h1>
+<p>After for all:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">OT_Analysis</span>
+</pre></div>
+</div>
+</section>
+<section id="launch-project">
+<h1>Launch project<a class="headerlink" href="#launch-project" title="Permalink to this heading"></a></h1>
+<p>In a termnial, run (from anywhere):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ot_analysis</span> <span class="ow">or</span> <span class="n">OT_Analysis</span>
+</pre></div>
+</div>
+<p>You can also download the package on Github and create an already complete virtual environment to launch the software</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">phpuech</span><span class="o">/</span><span class="n">OT</span><span class="o">-</span><span class="n">Analysis</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">OTAnalysis</span>
+<span class="n">conda</span> <span class="n">env</span> <span class="n">create</span> <span class="o">-</span><span class="n">f</span> <span class="n">environment</span><span class="o">.</span><span class="n">yml</span>
+
+<span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">main</span>
+</pre></div>
+</div>
 <section id="flow-of-the-use-process">
 <h2>Flow of the use process<a class="headerlink" href="#flow-of-the-use-process" title="Permalink to this heading"></a></h2>
 <p>Launch on an interface allowing to select the parameters for a file analysis in back-end</p>
@@ -141,7 +185,6 @@ If selected sphere, appearance of the physical parameters menu for the calculati
 <ul class="simple">
 <li><p>Close supervision Panel: Possibility to close this menu for a more important visualization of the curves</p></li>
 <li><p>Buttons to navigate between the curves. Can be operated with the left/right arrow keys</p></li>
-<li><p>Button to save the displayed graphic</p></li>
 <li><p>Button to save the output file with an indication that the supervision is stopped at this curve (treat_supervised column)</p></li>
 <li><p>curve name</p></li>
 <li><p>button for zooming with characteristic point and fit on distance curves (Pull and Press segment only)</p></li>
@@ -165,61 +208,27 @@ then click on the graph:</p>
 <li><p>on the two extreme points for the fit</p></li>
 </ul>
 </section>
+<section id="summary-plot">
+<h3>Summary plot<a class="headerlink" href="#summary-plot" title="Permalink to this heading"></a></h3>
+<p>On the last curve, a yellow button appears at the bottom of the supervision table. This button displays a graphic summary window for the validation of the input data as well as the classification with respect to the thresholds.
+A toggle button in the upper right corner allows to switch from piecharts to scatter plots</p>
 </section>
 </section>
-<section id="install-miniconda-create-conda-environment">
-<h1>Install MiniConda &amp;&amp; Create conda environment<a class="headerlink" href="#install-miniconda-create-conda-environment" title="Permalink to this heading"></a></h1>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">repo</span><span class="o">.</span><span class="n">anaconda</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">miniconda</span><span class="o">/</span><span class="n">Miniconda3</span><span class="o">-</span><span class="n">latest</span><span class="o">-</span><span class="n">Linux</span><span class="o">-</span><span class="n">x86_64</span><span class="o">.</span><span class="n">sh</span>
-<span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="n">Miniconda3</span><span class="o">-</span><span class="n">latest</span><span class="o">-</span><span class="n">Linux</span><span class="o">-</span><span class="n">x86_64</span><span class="o">.</span><span class="n">sh</span>
-<span class="o">./</span><span class="n">Miniconda3</span><span class="o">-</span><span class="n">latest</span><span class="o">-</span><span class="n">Linux</span><span class="o">-</span><span class="n">x86_64</span><span class="o">.</span><span class="n">sh</span>
-<span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">newenv</span>
-<span class="n">conda</span> <span class="n">activate</span> <span class="n">newenv</span>
-</pre></div>
-</div>
-</section>
-<section id="install-package">
-<h1>Install package<a class="headerlink" href="#install-package" title="Permalink to this heading"></a></h1>
-<p>You can install napari-openlabframe via <span class="raw-html-m2r"><a href="https://pypi.org/project/pip/" rel="opener">pip</a></span>:</p>
-<p>Installation directly through the python pip
-if OS system is Windows and Mac:</p>
-<blockquote>
-<div><p>Used Anaconda prompt not CMD or Mac console</p>
-</div></blockquote>
-<p>if OS system Linux after conda install:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span>
-<span class="n">source</span> <span class="o">.</span><span class="n">bashrc</span>
-<span class="n">conda</span> <span class="n">install</span> <span class="n">pip</span>
-</pre></div>
-</div>
-<p>After for all:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">OT_Analysis</span>
-</pre></div>
-</div>
-<p>Installation by conda environment already create</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">TigiGln</span><span class="o">/</span><span class="n">OTAnalysis</span><span class="o">.</span><span class="n">git</span>
-<span class="n">cd</span> <span class="n">OTAnalysis</span>
-<span class="n">conda</span> <span class="n">env</span> <span class="n">create</span> <span class="o">-</span><span class="n">f</span> <span class="n">environment</span><span class="o">.</span><span class="n">yml</span>
-</pre></div>
-</div>
-</section>
-<section id="launch-project">
-<h1>Launch project<a class="headerlink" href="#launch-project" title="Permalink to this heading"></a></h1>
-<p>In a termnial, run (from anywhere):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ot_analysis</span> <span class="ow">or</span> <span class="n">OT_Analysis</span>
-</pre></div>
-</div>
 </section>
 <section id="documentation">
 <h1>Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading"></a></h1>
+<p>If adding functionality with docstring, update the documentation</p>
 <section id="update">
 <h2>Update<a class="headerlink" href="#update" title="Permalink to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">html</span>
 </pre></div>
 </div>
 </section>
-<section id="visualization">
-<h2>Visualization<a class="headerlink" href="#visualization" title="Permalink to this heading"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">firefox</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">ot_analysis</span><span class="o">.</span><span class="n">readthedocs</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">en</span><span class="o">/</span><span class="n">latest</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">html</span>
+<section id="visualization-documentation">
+<h2>Visualization documentation<a class="headerlink" href="#visualization-documentation" title="Permalink to this heading"></a></h2>
+<p>Click on the Help button in the interface
+or</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">firefox</span> <span class="n">file</span><span class="p">:</span><span class="o">///</span><span class="n">home</span><span class="o">/</span><span class="n">thierry</span><span class="o">/</span><span class="n">Bureau</span><span class="o">/</span><span class="n">OT_Analysis</span><span class="o">/</span><span class="n">_build</span><span class="o">/</span><span class="n">html</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">html</span>
 </pre></div>
 </div>
 </section>
@@ -480,6 +489,7 @@ columns</p>
 </section>
 <section id="data-calculated-if-type-of-curves-different-from-non-adhesive-infinite-tube-or-rejected">
 <h3>Data calculated if type of curves different from non-adhesive, infinite tube or rejected<a class="headerlink" href="#data-calculated-if-type-of-curves-different-from-non-adhesive-infinite-tube-or-rejected" title="Permalink to this heading"></a></h3>
+<a class="reference external image-reference" href="./pictures/description_points.png"><img alt="Screenshot" src="_images/description_points.png" /></a>
 <ul class="simple">
 <li><dl class="simple">
 <dt>point_transition_index type=int</dt><dd><p>index of the break point of the tube (called transition point)</p>
@@ -536,6 +546,32 @@ columns</p>
 </li>
 <li><dl class="simple">
 <dt>jump_distance_end_pull (nm) type=float</dt><dd><p>distance between the maximum force of the curve and the point of return to the baseline</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="slope-of-fits-for-classification">
+<h3>Slope of fits for classification<a class="headerlink" href="#slope-of-fits-for-classification" title="Permalink to this heading"></a></h3>
+<a class="reference external image-reference" href="./pictures/description_fits.png"><img alt="Screenshot" src="_images/description_fits.png" /></a>
+<ul class="simple">
+<li><dl class="simple">
+<dt>slope_fitted_classification_max type=float</dt><dd><p>slope of the linear adjustment of 1/3 of the points between the release point and the max point removed at the index of the max point</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>slope_fitted_classification_release type=float</dt><dd><p>slope of the linear adjustment of 1/3 of the points between the release point and the max point add to the index of the release point</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>slope_fitted_classification_max_transition type=float</dt><dd><p>slope of the linear fit between the max point and the transition point</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>slope_fitted_classification_return_endline type=float</dt><dd><p>slope of the linear fit between the transition point and the baseline return point</p>
 </dd>
 </dl>
 </li>

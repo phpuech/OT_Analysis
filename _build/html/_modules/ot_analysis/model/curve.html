@@ -45,7 +45,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#launch-project">Launch project</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#documentation">Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../user_doc.html">DOC_USER</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../user_doc.html#center-ot-analysis-a-software-for-rich-analysis-of-force-curves-from-optical-tweezer-with-living-cells-center"><span class="raw-html-m2r"><center> OT-Analysis : a software for rich analysis of force curves from optical tweezer (with living cells)</center></span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_doc.html#center-ot-analysis-a-software-for-rich-analysis-of-force-curves-when-probing-living-cells-with-optical-tweezers-center"><span class="raw-html-m2r"><center> OT-Analysis: a software for rich analysis of force curves when probing living cells with optical tweezers </center></span></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../modules.html">OT_Analysis</a></li>
 </ul>
 
@@ -994,9 +994,9 @@
                                     <span class="n">index_start</span><span class="p">,</span> <span class="n">index_end</span><span class="p">,</span> <span class="s2">&quot;fitted_classification_max_transition&quot;</span><span class="p">)</span>
 
                         <span class="c1">###### fit return  endline #######</span>
-                        <span class="n">jump_nb_point_end</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>
-                            <span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="s1">&#39;jump_nb_points_end&#39;</span><span class="p">]</span><span class="o">//</span><span class="mi">3</span><span class="p">)</span>
-                        <span class="n">index_start</span> <span class="o">=</span> <span class="n">index_return_endline</span> <span class="o">-</span> <span class="n">jump_nb_point_end</span>
+                        <span class="c1"># jump_nb_point_end = int(</span>
+                        <span class="c1">#     self.features[&#39;jump_nb_points_end&#39;]//3)</span>
+                        <span class="n">index_start</span> <span class="o">=</span> <span class="n">index_return_endline</span><span class="o">-</span><span class="mi">10</span>
                         <span class="n">index_end</span> <span class="o">=</span> <span class="n">index_return_endline</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">fit_linear_classification</span><span class="p">(</span>
                             <span class="n">index_start</span><span class="p">,</span> <span class="n">index_end</span><span class="p">,</span> <span class="s2">&quot;fitted_classification_return_endline&quot;</span><span class="p">)</span>

@@ -8,6 +8,52 @@ OT_Analysis
 # Tool for managing the results of optical tweezers
 Tool for extracting, analyzing and classifying optical tweezer data curves
 
+# Install MiniConda && Create conda environment
+For the installation of the library please install conda and create a virtual environment to avoid library conflicts (conflict between Spyder and PyQt5 observed)
+
+For OS is Linux or Mac
+```
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+chmod +x Miniconda3-latest-Linux-x86_64.sh
+./Miniconda3-latest-Linux-x86_64.sh
+conda create -n "newenv"
+conda activate newenv
+source .bashrc
+conda install pip
+```
+
+Otherwise OS is Windows:
+Download conda at this address depending on your system OS versions: https://docs.conda.io/en/latest/miniconda.html
+Go to the conda prompt
+```
+conda create -n "newenv"
+conda activate "newenv"
+conda install pip
+```
+
+# Install package
+
+After for all:
+```
+python -m pip install OT_Analysis
+```
+
+# Launch project
+In a termnial, run (from anywhere):
+```
+ot_analysis or OT_Analysis
+```
+
+You can also download the package on Github and create an already complete virtual environment to launch the software
+```
+git clone https://github.com/phpuech/OT-Analysis.git
+cd OTAnalysis
+conda env create -f environment.yml
+
+python -m main
+
+```
+
 ## Flow of the use process
 Launch on an interface allowing to select the parameters for a file analysis in back-end
 
@@ -49,7 +95,6 @@ Visualization of all curves as a function of time on the 3 axes and as a functio
 ### Supervision menu
 - Close supervision Panel: Possibility to close this menu for a more important visualization of the curves
 - Buttons to navigate between the curves. Can be operated with the left/right arrow keys
-- Button to save the displayed graphic
 - Button to save the output file with an indication that the supervision is stopped at this curve (treat_supervised column)
 - curve name
 - button for zooming with characteristic point and fit on distance curves (Pull and Press segment only)
@@ -69,56 +114,25 @@ then click on the graph:
 - on the selected point
 - on the two extreme points for the fit
 
-# Install MiniConda && Create conda environment
-```
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-chmod +x Miniconda3-latest-Linux-x86_64.sh
-./Miniconda3-latest-Linux-x86_64.sh
-conda create -n newenv
-conda activate newenv
-```
+### Summary plot
+On the last curve, a yellow button appears at the bottom of the supervision table. This button displays a graphic summary window for the validation of the input data as well as the classification with respect to the thresholds.
+A toggle button in the upper right corner allows to switch from piecharts to scatter plots
 
-
-# Install package
-You can install napari-openlabframe via <a href="https://pypi.org/project/pip/" rel="opener">pip</a>:
-
-Installation directly through the python pip
-if OS system is Windows and Mac:
-    Used Anaconda prompt not CMD or Mac console
-if OS system Linux after conda install:
-```
-cd
-source .bashrc
-conda install pip
-```
-After for all:
-```
-python -m pip install OT_Analysis
-```
-
-Installation by conda environment already create
-```
-git clone https://github.com/TigiGln/OTAnalysis.git
-cd OTAnalysis
-conda env create -f environment.yml
-```
-
-# Launch project
-In a termnial, run (from anywhere):
-```
-ot_analysis or OT_Analysis
-```
 
 # Documentation
+
+If adding functionality with docstring, update the documentation
 
 ## Update
 ```
 make html
 ```
 
-## Visualization
+## Visualization documentation
+Click on the Help button in the interface
+or 
 ```
-firefox https://ot_analysis.readthedocs.io/en/latest/index.html
+firefox file:///home/thierry/Bureau/OT_Analysis/_build/html/index.html
 ```
 
 ## Explanation output file
@@ -229,6 +243,7 @@ columns
     coefficient of the contact loss slope between the ball and the cell due to the retraction effect of the cell with respect to the ball
 
 ### Data calculated if type of curves different from non-adhesive, infinite tube or rejected
+![Screenshot](./pictures/description_points.png)
 - point_transition_index type=int
     index of the break point of the tube (called transition point)
 - point_transition_value (pN) type=float
@@ -253,6 +268,17 @@ columns
     distance between the release point and the maximum force of the curve
 - jump_distance_end_pull (nm) type=float
     distance between the maximum force of the curve and the point of return to the baseline
+
+### Slope of fits for classification
+![Screenshot](./pictures/description_fits.png)
+- slope_fitted_classification_max type=float
+     slope of the linear adjustment of 1/3 of the points between the release point and the max point removed at the index of the max point
+- slope_fitted_classification_release type=float 
+    slope of the linear adjustment of 1/3 of the points between the release point and the max point add to the index of the release point
+- slope_fitted_classification_max_transition type=float 
+    slope of the linear fit between the max point and the transition point
+- slope_fitted_classification_return_endline type=float
+    slope of the linear fit between the transition point and the baseline return point
 
 ### Boolean validation of the fits
 - valid_fit_press type=bool

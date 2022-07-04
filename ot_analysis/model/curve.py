@@ -918,9 +918,9 @@ class Curve:
                                     index_start, index_end, "fitted_classification_max_transition")
 
                         ###### fit return  endline #######
-                        jump_nb_point_end = int(
-                            self.features['jump_nb_points_end']//3)
-                        index_start = index_return_endline - jump_nb_point_end
+                        # jump_nb_point_end = int(
+                        #     self.features['jump_nb_points_end']//3)
+                        index_start = index_return_endline-10
                         index_end = index_return_endline
                         self.fit_linear_classification(
                             index_start, index_end, "fitted_classification_return_endline")
