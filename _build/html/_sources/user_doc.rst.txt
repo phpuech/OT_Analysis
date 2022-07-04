@@ -1,4 +1,4 @@
 DOC_USER
 ========
 
-.. mdinclude:: ./user_documentation/user_documentation.md
+.. mdinclude:: ./user_documentation.md

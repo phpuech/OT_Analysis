@@ -176,8 +176,8 @@ class View(QMainWindow, QWidget):
         """
 
         webbrowser.open(
-            "http://otanalysis.free.fr/")
-            #"https://otanalysis.readthedocs.io/en/latest/index.html")
+            "https://phpuech.github.io/index_ot_analysis.html")
+            
 
     ###################################################################################
 

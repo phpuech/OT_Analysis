@@ -51,114 +51,60 @@ The tool has additional features to correct the baseline of the optical effect o
 
 Here are the details:
 
-<!-- <table>
-    <tr>
-        <td>
-           <img src="../../user_documentation/pictures_doc/1select_folder.png"> 
-        </td>
-        <td>
-            You arrive on the tool on this window allowing to load your curves files (jpk-nt-force or txt)
-	        The Logger checkbox allows to generate a    log file to manage the debugging of the tool
-            A "Help" button allows you to be redirected to an online documentation
-            The condition frame allows you to write information about the experiment (name of antibody, drug, etc.)<br>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            You can either load a directory or files: <br>
-            <img src="../../user_documentation/pictures_doc/tree_exemple.png"> 
-            If you load a directory: <br>
-            <img src="../../user_documentation/pictures_doc/warning.png">
-            In the example: loading of the "day_one" directory -> mixing of the child curves without taking into account the name condition of the directory and the condition written in the interface<br>
-        </td>
-        <td>
-            <img src="../../user_documentation/pictures_doc/2select_folder2.png"> 
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <img src="../../user_documentation/pictures_doc/3launch_analysis.png"><br>
-        </td>
-        <td>
-            Before starting the analysis of the data set, it is necessary to specify thresholds for the decision to classify or reject files<br>
-            You can either download a tsv file of an old analysis (save at the end of each analysis) or enter the parameters one by one<br>
-            <strong>Parameters:</strong><br>
-            Selection of the fitting model for the "Press" segment<br>
-            Management of thresholds to define that a file is incomplete according to the length of the last segment of the curve<br>
-            Tolerable force threshold on secondary axes to determine if a curve is misaligned<br>
-            Thresholds for the classification of the patterns on the "Pull" segments and the determination of the different types (adhesion, membrane tubes, non adhesion)<br>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <img src="../../user_documentation/pictures_doc/4classification.png">
-            <strong>Types</strong>:
-            <strong>NAD</strong>: non-adhesive curve with no significant pattern on the "Pull" segment of the curve
-            <strong>AD</strong>: adhesive curves showing a brief and significant event corresponding to the adhesion with a membrane molecule and its rupture
-            <strong>FTU</strong>: finite membranaire tube a significant peak followed by events of varying duration representative of the elongation of the membrane tube with breakage
-            <strong>ITU</strong>: infinite membranaire tube a significant peak followed by events of varying duration representative of the elongation of the membrane tube without breakage<br><br>
-            After analysis, menu to choose between viewing the data with user interaction (supervised) or saving the output file (unsupervised)
-        </td>
-        <td>
-            <img src="../../user_documentation/pictures_doc/5unsupervised.png"><br>
-        </td>
-    </tr>
-</table> -->
-
-
-![Image](../../user_documentation/pictures_doc/screen_select_folder.png)<br>
-![Image](../../user_documentation/pictures_doc/screen_select_folder2.png)<br>
-![Image](../../user_documentation/pictures_doc/screen_launch.png)<br>
-![Image](../../user_documentation/pictures_doc/screen_options.png)<br>
+![Image](./pictures/screen_select_folder.png)<br>
+![Image](./pictures/screen_select_folder2.png)<br>
+![Image](./pictures/screen_launch.png)<br>
+![Image](./pictures/screen_options.png)<br>
 
 ## Supervision
-![Screenshot](../../user_documentation/pictures_doc/6supervised.png)
+![Screenshot](./pictures/6supervised.png)
 Visualization of the curves on the three space axes for the visualization of the alignment on the secondary axes.
 
 Supervision panel to display and to modify the results of the analysis
-![Screenshot](../../user_documentation/pictures_doc/7courbe_time.png)
+![Screenshot](./pictures/7courbe_time.png)
 
 Display of the force vs. time curve with characteristic points to determine the classification
 
-![Screenshot](../../user_documentation/pictures_doc/8courbe_distance.png)
+![Screenshot](./pictures/8courbe_distance.png)
 Display of the force curve as a function of the plate displacement with characteristic points and allowing the determination of the classification
 
 ## Modification of the characteristic points or adjustments
-![Screenshot](../../user_documentation/pictures_doc/9modif_characteristics_points.png)
+![Screenshot](./pictures/9modif_characteristics_points.png)
 If some points on the "Pull" segment are not correctly determined, you can directly select the coordinates of the points.
 
-![Screenshot](../../user_documentation/pictures_doc/10pick_event.png)
+![Screenshot](./pictures/10pick_event.png)
 Possibility to select the transition fit, the transition point or the point of return to the baseline
 
-![Screenshot](../../user_documentation/pictures_doc/11avant_pick_event.png)
+![Screenshot](./pictures/11avant_pick_event.png)
 
-<div style="text-align: center" markdown=1>
-    <img src="../../user_documentation/pictures_doc/arrow.png">
-</div>
 
-![Screenshot](../../user_documentation/pictures_doc/12select_first_point.png)
+![Screenshot](./pictures/arrow.png)
 
-<div style="text-align: center">
-    <img src="../../user_documentation/pictures_doc/arrow.png">
-</div>
 
-![Screenshot](../../user_documentation/pictures_doc/13fit_transition_modif.png)
+![Screenshot](./pictures/12select_first_point.png)
+
+
+![Screenshot](./pictures/arrow.png)
+
+
+![Screenshot](./pictures/13fit_transition_modif.png)
 
 ## Correction of the optical effect
 
 To correct the optical effect, please use the toggle in the supervision panel, this will open a secondary window
 
-![Screenshot](../../user_documentation/pictures_doc/14correction1.png)
+![Screenshot](./pictures/14correction1.png)
 
 On the graph, by clicking, select the points of the extremities of the data range undergoing the optical effect
 
-![Screenshot](../../user_documentation/pictures_doc/15correction2.png)
+![Screenshot](./pictures/15correction2.png)
 
-<div style="text-align: center">
-    <img src="../../user_documentation/pictures_doc/arrow.png">
-</div>
 
-![Screenshot](../../user_documentation/pictures_doc/16correction3.png)
+
+![Screenshot](./pictures/arrow.png)
+
+
+![Screenshot](./pictures/16correction3.png)
 
 <p>Visualization of the correction with the orange curve compared to the blue curve representing the original data
 To apply the correction to the original data, please press the "Accept correction" button on the top left </p>
@@ -169,9 +115,9 @@ This graphical summary allows the user to verify the results.
 Thanks to piechart, one can evaluate the quality of the results of the experiment
 Thanks to the scatter plots, the good respect of the thresholds given to the analysis as well as the reliability of the classification
 
-![Screenshot](../../user_documentation/pictures_doc/17piechart.png)
+![Screenshot](./pictures/17piechart.png)
 
-![Screenshot](../../user_documentation/pictures_doc/18scatter_plot_corr.png)
+![Screenshot](./pictures/18scatter_plot_corr.png)
 
 ## Save output + method
 
@@ -179,9 +125,9 @@ After performing the analysis and making corrections  through supervision, we ca
 the name is output: output_{date}_{time}.csv <br>
 the method namefile is: methods_date_time.tsv <br>
 
-![Screenshot](../../user_documentation/pictures_doc/19save.png)<br>
+![Screenshot](./pictures/19save.png)<br>
 
-![Screenshot](../../user_documentation/pictures_doc/20modale_of_save.png)<br>
+![Screenshot](./pictures/20modale_of_save.png)<br>
 
 The output file is a csv file with 68 columns described in the software README.
 * treat_supervised

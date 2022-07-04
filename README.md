@@ -136,7 +136,7 @@ make html
 Click on the Help button in the interface
 or 
 ```
-firefox file:///home/thierry/Bureau/OT_Analysis/_build/html/index.html
+firefox https://phpuech.github.io/user_doc.html
 ```
 
 ## Explanation output file
