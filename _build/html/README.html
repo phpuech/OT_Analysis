@@ -41,6 +41,7 @@
 <li class="toctree-l1"><a class="reference internal" href="readme_link.html">README</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readme_link.html#ot-analysis">OT_Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readme_link.html#tool-for-managing-the-results-of-optical-tweezers">Tool for managing the results of optical tweezers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme_link.html#journal-open-source-software">Journal Open Source Software</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readme_link.html#install-miniconda-create-conda-environment">Install MiniConda &amp;&amp; Create conda environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readme_link.html#install-package">Install package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readme_link.html#launch-project">Launch project</a></li>
@@ -83,6 +84,11 @@
 <section id="tool-for-managing-the-results-of-optical-tweezers">
 <h1>Tool for managing the results of optical tweezers<a class="headerlink" href="#tool-for-managing-the-results-of-optical-tweezers" title="Permalink to this heading"></a></h1>
 <p>Tool for extracting, analyzing and classifying optical tweezer data curves</p>
+</section>
+<section id="journal-open-source-software">
+<h1>Journal Open Source Software<a class="headerlink" href="#journal-open-source-software" title="Permalink to this heading"></a></h1>
+<p>For better visibility and recognition of the real significant contribution in the analysis of optical tweezers data,
+the tool was published in the open source software journal at the following address</p>
 </section>
 <section id="install-miniconda-create-conda-environment">
 <h1>Install MiniConda &amp;&amp; Create conda environment<a class="headerlink" href="#install-miniconda-create-conda-environment" title="Permalink to this heading"></a></h1>
@@ -489,7 +495,7 @@ columns</p>
 </section>
 <section id="data-calculated-if-type-of-curves-different-from-non-adhesive-infinite-tube-or-rejected">
 <h3>Data calculated if type of curves different from non-adhesive, infinite tube or rejected<a class="headerlink" href="#data-calculated-if-type-of-curves-different-from-non-adhesive-infinite-tube-or-rejected" title="Permalink to this heading"></a></h3>
-<a class="reference external image-reference" href="./pictures/description_points.png"><img alt="Screenshot" src="_images/description_points.png" /></a>
+<a class="reference external image-reference" href="./pictures/description_points.png"><img alt="Image" src="_images/description_points.png" /></a>
 <ul class="simple">
 <li><dl class="simple">
 <dt>point_transition_index type=int</dt><dd><p>index of the break point of the tube (called transition point)</p>
@@ -553,7 +559,7 @@ columns</p>
 </section>
 <section id="slope-of-fits-for-classification">
 <h3>Slope of fits for classification<a class="headerlink" href="#slope-of-fits-for-classification" title="Permalink to this heading"></a></h3>
-<a class="reference external image-reference" href="./pictures/description_fits.png"><img alt="Screenshot" src="_images/description_fits.png" /></a>
+<a class="reference external image-reference" href="./pictures/description_fits.png"><img alt="Image" src="_images/description_fits.png" /></a>
 <ul class="simple">
 <li><dl class="simple">
 <dt>slope_fitted_classification_max type=float</dt><dd><p>slope of the linear adjustment of 1/3 of the points between the release point and the max point removed at the index of the max point</p>
@@ -618,7 +624,7 @@ if we want to add a new feature after analysis but on the object <a href="#id1">
 <li><p>we create a widget that calls this method through the dict-curve of the controller</p>
 <p>## Adapt input
 The input text file must have a global header, a calibration part, segment headers and data</p>
-<a class="reference external image-reference" href="./pictures/structure_file_text.png"><img alt="Screenshot" src="_images/structure_file_text.png" /></a>
+<a class="reference external image-reference" href="./pictures/structure_file_text.png"><img alt="Image" src="_images/structure_file_text.png" /></a>
 <p>If your data do not have a force (xsignal1, ysignal1, zsignal1), time (seriesTime) and distance column:</p>
 <ul class="simple">
 <li><p>You will have to implement methods in the specific curve object of your data</p></li>

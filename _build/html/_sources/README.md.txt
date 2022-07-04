@@ -8,6 +8,10 @@ OT_Analysis
 # Tool for managing the results of optical tweezers
 Tool for extracting, analyzing and classifying optical tweezer data curves
 
+# Journal Open Source Software
+For better visibility and recognition of the real significant contribution in the analysis of optical tweezers data,
+the tool was published in the open source software journal at the following address
+
 # Install MiniConda && Create conda environment
 For the installation of the library please install conda and create a virtual environment to avoid library conflicts (conflict between Spyder and PyQt5 observed)
 
@@ -243,7 +247,7 @@ columns
     coefficient of the contact loss slope between the ball and the cell due to the retraction effect of the cell with respect to the ball
 
 ### Data calculated if type of curves different from non-adhesive, infinite tube or rejected
-![Screenshot](./pictures/description_points.png)
+![Image](./pictures/description_points.png)
 - point_transition_index type=int
     index of the break point of the tube (called transition point)
 - point_transition_value (pN) type=float
@@ -270,7 +274,7 @@ columns
     distance between the maximum force of the curve and the point of return to the baseline
 
 ### Slope of fits for classification
-![Screenshot](./pictures/description_fits.png)
+![Image](./pictures/description_fits.png)
 - slope_fitted_classification_max type=float
      slope of the linear adjustment of 1/3 of the points between the release point and the max point removed at the index of the max point
 - slope_fitted_classification_release type=float 
@@ -309,7 +313,7 @@ if we want to add a new feature after analysis but on the object *curve :
 
  ## Adapt input
  The input text file must have a global header, a calibration part, segment headers and data
-![Screenshot](./pictures/structure_file_text.png)
+![Image](./pictures/structure_file_text.png)
  
  If your data do not have a force (xsignal1, ysignal1, zsignal1), time (seriesTime) and distance column:
 - You will have to implement methods in the specific curve object of your data
