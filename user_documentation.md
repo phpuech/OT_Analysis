@@ -29,7 +29,7 @@ conda activate newenv
 ## Install Package
 ```
 conda install pip 
-python -m pip install OTAnalysis
+python -m pip install OT-Analysis
 ```
 ## Launch project
 In a termnial, run (from anywhere):

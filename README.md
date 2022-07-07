@@ -40,7 +40,7 @@ conda install pip
 
 After for all:
 ```
-python -m pip install OT_Analysis
+python -m pip install OT-Analysis
 ```
 
 # Launch project
