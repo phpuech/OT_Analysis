@@ -11,6 +11,7 @@ from datetime import datetime
 from PyQt5.QtWidgets import QApplication
 from .view.mainview import View
 from .controller.controller import Controller
+from art import tprint
 
 
 TODAY = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
@@ -21,7 +22,7 @@ def main():
     Launch application for curve analyis
     """
     # my_os = sys.platform
-
+    tprint("OT_Analysis")
     app = QApplication.instance()
     if not app:
         app = QApplication(sys.argv)

@@ -23,6 +23,7 @@ chmod +x Miniconda3-latest-Linux-x86_64.sh
 conda create -n "newenv"
 conda activate newenv
 source .bashrc
+conda activate newenv
 conda install pip
 ```
 

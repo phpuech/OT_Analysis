@@ -12,5 +12,6 @@ dependencies:
 - qtpy
 - pip:
     - supyr-struct
+    - art
     - OT-Analysis
 # conda-feedstock // conda-forge

@@ -8,7 +8,8 @@ requires = [
     'pandas',
     'matplotlib',
     'PyQt5',
-    'supyr-struct'
+    'supyr-struct',
+    'art'
 ]
 build-backend = "setuptools.build_meta"
 
