@@ -1,5 +1,5 @@
 ---
-title: 'OT-Analysis: a software for rich analysis of force curves when probing living cells with optical tweezers'
+title: 'OT_Analysis: a software for rich analysis of force curves when probing living cells with optical tweezers'
 tags:
   - Python
   - optical tweezers
