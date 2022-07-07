@@ -46,7 +46,7 @@ python -m pip install OT_Analysis
 # Launch project
 In a termnial, run (from anywhere):
 ```
-ot_analysis or OT_Analysis
+otanalysis
 ```
 
 You can also download the package on Github and create an already complete virtual environment to launch the software

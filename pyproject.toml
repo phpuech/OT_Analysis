@@ -2,7 +2,7 @@
 requires = [
     'setuptools>=54',
     'wheel',
-    'importlib-metadata; python_version>"3.7"',
+    'importlib-metadata; python_version>="3.7"',
     'numpy>=1.21',
     'scipy',
     'pandas',

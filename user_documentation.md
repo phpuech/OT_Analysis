@@ -34,7 +34,7 @@ python -m pip install OTAnalysis
 ## Launch project
 In a termnial, run (from anywhere):
 ```
-otanalysis or OTAnalysis
+otanalysis
 ```
 ## <center>Introduction</center>
 
