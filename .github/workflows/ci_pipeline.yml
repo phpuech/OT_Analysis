@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  My-first-CI:
+  Basic-CI:
   runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
