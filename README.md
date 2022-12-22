@@ -119,55 +119,58 @@ Note that due to the curvature of the cells we used (T cells, 10µm in diameter)
 
 - Factor optical effect (x STD): Number of times the standard deviation to correct the optical effect. 
 
-To ease the reuse of previously used analysis parameters, a method saving/loading buttonia avalaible.
+To ease the reuse of previously used analysis parameters, method saving/loading buttons are avalaible.
 
 ## Menu after launching the analysis
 
-There are three options:
+There are three options to run the analysis
 
-- Supervised: Allows you to switch to a new window with the display of curves and a supervisory menu
-- Unsupervised: Allows you to retrieve the output file of the automatic analysis
-- ...with graphs: Allows you to retrieve the output file of the automatic analysis completed with all the graphs
+- Supervised: The computer pre-analyses the data, presents the analysis on graphs and offers to the user a selection of tools to correct, reanalyse, requalify the data. This will happen in a new dedicated window.
+- Unsupervised: The computer does it all alone, and you retrieve the output file of the automatic analysis. You cannot act on the analysis.
+- ...with graphs: Same as above, but output the graphs of the analysed curves for further consultation
 
-If we choose supervised:
+If one chooses supervised, it will open a new window with : 
 
 ### Graphic display window with supervision
 
-Visualization of all curves as a function of time on the 3 axes and as a function of distance on the main_axis
+This allows the visualization of all curves as a function of time on the 3 axes and as a function of distance on the main_axis. Time can be switched to distance.
 
 ### Supervision menu
 
-- Close supervision Panel: Possibility to close this menu for a more important visualization of the curves
+This menu contains a series of buttons and options that are briefly described below.
+
+- Close supervision Panel: Closes the menu for a larger space for visualization of the curves
 - Buttons to navigate between the curves. Can be operated with the left/right arrow keys
 - Button to save the output file with an indication that the supervision is stopped at this curve (treat_supervised column)
-- curve name
-- button for zooming with characteristic point and fit on distance curves (Pull and Press segment only)
-- if curve misaligned warning of misalignment axis with a possibility to change this status
-- fit validation of the Press segment
-- management of the optical correction with a post-analysis control
-- fit validation of the Pull segment
-- correction of the type of curve classification (type defined checked)
+- Curve name is presented
+- Zooming for setting characteristic point and fit on distance curves (Pull and Press segment only)
+- Curve misaligned warning of misalignment axis, with the possibility to change this status
+- Indication of the validity of the fit of the Press segment
+- Management of the optical correction with a post-analysis control
+- Indication of the validity of the fit of the Pull segment
+- Type of curve obtained by automatic classification (type defined checked) that can be hand modified by the user
 - Pagination to determine our position in the whole analysis. Possibility to move with the 'Enter' key and the number of the curve
 
-### Changes in points and fits
+### Changes in characteristic points and zones of fits
 
-In the supervision interface, you can modify the characteristic points and curve fits:
-Go to the force vs distance curve
-In the menu press Edit/Pick event
-in the secondary window that appears choose what you want to modify and click on OK
-then click on the graph:
-- on the selected point
-- on the two extreme points for the fit
+In the supervision interface, one can modify the characteristic points and curve fits:
+- Go to the force vs distance curve
+- In the menu press Edit/Pick event
+- in the secondary window that appears choose what you want to modify and click on OK
+- then click on the graph, either:
+    - on the selected point
+    - on the two extreme points for the fit
 
 ### Summary plot
 
-On the last curve, a yellow button appears at the bottom of the supervision table. This button displays a graphic summary window for the validation of the input data as well as the classification with respect to the thresholds.
-A toggle button in the upper right corner allows to switch from piecharts to scatter plots
+When the last curve of the set is reached, a yellow button appears at the bottom of the supervision table that allows the display of a graphic summary window, allowing a rapid examen, by eye, that may help the user to validate the parameters of the analysis.
+
+Note that a toggle button in the upper right corner allows to switch from piecharts to scatter plots for these representations, allowing to see how the parameters of the analysis affect the data.
 
 
 # Documentation
 
-If adding functionality with docstring, update the documentation
+If you are considering to add any functionality with docstring, update the documentation
 
 ## Update
 
@@ -177,7 +180,7 @@ make html
 
 ## Visualization documentation
 
-Click on the Help button in the interface or 
+Click on the Help button in the interface or use (here with firefow, but any browser will do)
 
 ```
 firefox https://phpuech.github.io/user_doc.html
@@ -185,14 +188,14 @@ firefox https://phpuech.github.io/user_doc.html
 
 ## Output file format
 
-The output file is a `csv` file with 48 columns and 1 line per analyzed curve.
-Bellow is the description of each column.
+The output data is contained in a `csv` file with 48 columns and 1 line per analyzed curve.
+Bellow is the rapid description of each column.
 
 
 ### Important data from the analysis for post-processing
 
 - treat_supervised type=bool
-    True if curve visualized otherwise False
+    True if curve is visualized otherwise False
 - automatic_type type=str
     type determined by the automatic analysis
 - type type=str
@@ -222,23 +225,23 @@ Bellow is the description of each column.
 - tolerance type=float
     noise tolerance for the baseline (xstd)
 - bead type=str
-    number of the ball used for the curve
+    number of the bead used for the curve
 - cell type=str
     number of the cell used for the curve
 - couple type=str
-    couple ball number and cell number
+    couple bead number and cell number
 
 ### Theoretical data present in the headers of the files
 - main_axis type=str
-    main axis of the experiment and the direction of approach of the cell with respect to the ball:
-        +X: the cell approaches from the right
+    main axis of the experiment and the direction of approach of the cell with respect to the bead. Here are our choices for orientations and signs.
+        +X : the cell approaches from the right
         -X : the cell approaches from the left
         +Y : the cell comes from the top
         -Y : the cell comes from the bottom
 - stiffness type=float
-    value of the spring stiffness to correct the distance values
+    value of the spring stiffness (calibrated by the software prior to experiment) to correct the distance values
 - theorical_contact_force (N) type=float
-    theoretical contact force between the ball and the cell required by the user before starting the experiment
+    theoretical contact force between the beadand the cell required by the user before starting the experiment
 - theorical_distance_Press (m) type=float
     theoretical length of the "Press" segment
 - theorical_speed_Press (m/s) type=float
@@ -270,9 +273,9 @@ Bellow is the description of each column.
 - error (pN/nm) type=float
     calculates the error of the force slope for the "Press" segment
 - contact_point_index type=int
-    index of the contact point between the ball and the cell on the "Press" segment
+    index of the contact point between the beadand the cell on the "Press" segment
 - contact_point_value  (pN) type=float
-    force value of the contact point between the ball and the cell on the "Press" segment
+    force value of the contact point between the beadand the cell on the "Press" segment
 - force_min_press_index type=int
     index of the minimum force of the "Press" segment
 - force_min_press_value (pN) type=float
@@ -282,9 +285,9 @@ Bellow is the description of each column.
 - force_min_curve_value (pN) type=float
     value of the minimum force of the curve (sometimes confused with minimum Press)
 - point_release_index type=int
-    'index of the point where the cell loses contact with the ball (without taking \ into account the adhesive molecules or the membrane tubes).'
+    'index of the point where the cell loses contact with the bead(without taking \ into account the adhesive molecules or the membrane tubes).'
 - point_release_value (pN) type=float
-    value of the point where the cell loses contact with the ball (without taking \ into account the adhesive molecules or the membrane tubes).
+    value of the point where the cell loses contact with the bead(without taking \ into account the adhesive molecules or the membrane tubes).
 - force_max_pull_index type=int
     index of the maximum force on a part of the "Pull" segment between the release \ point and the return to the baseline
 - force_max_pull_value (pN) type=float
@@ -294,7 +297,7 @@ Bellow is the description of each column.
 - force_max_curve_value (pN) type=float
     value of the maximum force of the curve
 - Pente (pN/nm) type=float
-    coefficient of the contact loss slope between the ball and the cell due to the retraction effect of the cell with respect to the ball
+    coefficient of the contact loss slope between the beadand the cell due to the retraction effect of the cell with respect to the ball
 
 ### Data calculated if type of curves different from non-adhesive, infinite tube or rejected
 
@@ -345,39 +348,40 @@ Bellow is the description of each column.
 
 ## Adding features
 
-To add a feature, two options are possible: 
-- During the automatic analysis 
-- After analysis for post processing
+For the ones who could be intersting in extending our code : to add a feature, two options are possible: 
+- During the automatic analysis (add your own data extraction procedure)
+- After analysis for post processing (add your own data visualisation of statistical analysis)
 
 ### In the code
 
-We need to add a method to the curve object
-then call it in the "analyzed_curve" method of the curve object
-This method is called by the controller when the automatic analysis is launched
+One needs to add a method to the curve object, then call it in the "analyzed_curve" method of the curve object.
+
+This method is called by the controller when the automatic analysis is launched, which is the basis for supervised or not methods.
 
 ### In the interface
 
-If we want to call an external post processing script: 
- - we create a method in the controller that loops on the dict_curve (dictionnare of curved object)
- - we adapt our add script so that it includes the data of the object
- - We then create a widget in the interface that calls the method of the view's controller attribute
+If one wants to call an external post processing script: 
+ - first,  create a method in the controller that loops on the dict_curve (dictionnare of curved object)
+ - second,  adapt our add script so that it includes the data of the object
+ - third, create a widget in the interface that calls the method of the view's controller attribute
+
 if we want to add a new feature after analysis but on the object *curve :
  - we add a method to curve
  - we create a widget that calls this method through the dict-curve of the controller
 
- ## Adapt input
+## Adapt input to other raw data formats (eg. other tweezers acquisitions or set-ups)
  
  The input text file must have a global header, a calibration part, segment headers and data
 ![Image](./pictures/structure_file_text.png)
  
- If your data do not have a force (xsignal1, ysignal1, zsignal1), time (seriesTime) and distance column:
+ If the data do not have a force (xsignal1, ysignal1, zsignal1), time (seriesTime) and distance column:
  
-- You will have to implement methods in the specific curve object of your data
-- modify the start of the analysis in the controller in the "create_dict_curves" method
-- adapt the supervision to the data to display
+- one will have to implement methods in the specific curve object of your data
+- then modify the start of the analysis in the controller in the "create_dict_curves" method
+- and finally, adapt the supervision to the data to display
 
 
 ## Future developments
 
-* Problem on some computers for the pick event of matplotlib (this should be an issue)
+* We noted on some computers issues with the "pick event" function of matplotlib, without finding easy solutions to fix that. Note that this won't prevent the use of the main functionnalities of the present software.
 
