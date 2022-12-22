@@ -189,7 +189,7 @@ firefox https://phpuech.github.io/user_doc.html
 ## Output file format
 
 The output data is contained in a `csv` file with 48 columns and 1 line per analyzed curve.
-Bellow is the rapid description of each column.
+Bellow is the rapid description of each column. Note that this description will soon be made more clear for a non-familiar user.
 
 
 ### Important data from the analysis for post-processing
