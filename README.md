@@ -6,17 +6,24 @@ OT_Analysis
 ==========
 
 # Tool for managing the results of optical tweezers
-Tool for extracting, analyzing and classifying optical tweezer data curves
+
+OT_Anlysis is a tool for extracting, analyzing and classifying data from optical tweezer experiments.
 
 # Journal Open Source Software
+
 For better visibility and recognition of the real significant contribution in the analysis of optical tweezers data,
 the tool was published in the open source software journal at the following address
 
-# Install MiniConda && Create conda environment
-For the installation of the library please install conda and create a virtual environment to avoid library conflicts (conflict between Spyder and PyQt5 observed)
 
-For OS is Linux or Mac
-```
+# Installation
+
+## Install MiniConda && Create conda environment
+
+We recommend to install conda and create a virtual environment to avoid library conflicts before you install OT_Analyis
+
+For Linux or Mac
+
+```sh
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 chmod +x Miniconda3-latest-Linux-x86_64.sh
 ./Miniconda3-latest-Linux-x86_64.sh
@@ -27,29 +34,37 @@ conda activate newenv
 conda install pip
 ```
 
-Otherwise OS is Windows:
-Download conda at this address depending on your system OS versions: https://docs.conda.io/en/latest/miniconda.html
+For Windows:
+
+Download conda at this address depending on your OS version: https://docs.conda.io/en/latest/miniconda.html
 Go to the conda prompt
+
 ```
 conda create -n "newenv"
 conda activate "newenv"
 conda install pip
 ```
 
-# Install package
+## Install the package from PyPi
 
-After for all:
+For all OSes:
+
 ```
 python -m pip install OT-Analysis
 ```
 
-# Launch project
-In a termnial, run (from anywhere):
+## Launch the software
+
+In order to open the OTAnalysis GUI, in a termnial, run (from anywhere):
+
 ```
 otanalysis
 ```
 
+### Build and run from source
+
 You can also download the package on Github and create an already complete virtual environment to launch the software
+
 ```
 git clone https://github.com/phpuech/OT-Analysis.git
 cd OTAnalysis
@@ -59,45 +74,58 @@ python -m main
 
 ```
 
-## Flow of the use process
-Launch on an interface allowing to select the parameters for a file analysis in back-end
+# Quick start using OTAnalysis
 
-### Condition of the experience
+## 1. Run the software with `otanalysis` in a terminal
+
+## 2. Check and adjust relevant parameters
+
+## Condition of the experiment
+
 - condition: Name of the antibody present on the beads during the experiment
 - drug: name of the drug used for the analysis if present
 
-### Fitting management
+## Fitting management
+
 Selection of the curve files to be analyzed either by selecting a directory or with the multiple selection of files
+
 - model: The model used to fit the "Press" curves (linear or sphere)
-If selected sphere, appearance of the physical parameters menu for the calculation of the Young's modulus
+If sphere is selected, the physical parameters menu for the calculation of the Young's modulus will appear
 - eta: Poisson's ratio
-- bead rdius: diameter of the ball used during the experiment
+- bead radius: diameter of the bead used during the experiment
 
 ### Management of curve anomalies
-Curve management parameters Incomplete (no analysis possible) or misaligned (analysis but warning)
+
+Curve management parameters can be either "Incomplete" (no analysis is possible) or "Misaligned" (analysis runs with a warning)
 - pulling length min : minimum percentage of the length of the "Pull" segment to determine if the curve is rejected despite the presence of all the segments indicated in the header
 - Fmax epsilon: percentage of max force on the major axis to determine misalignment of the curve on the minor axes
 
-### Classification condition
-- NAD if jump is < (PN): force condition to classify non-adhesive curves < pN
-- AD if position is < (nm): distance condition to separate the membership from the tubes
-- AD if slope is < (pts): condition number of points to separate the membership of the tubes
-- Factor overcome noise (xSTD): Number of times the standard deviation for the calculation of the characteristic points
-- Factor optical effect (xSTD): Number of times the standard deviation to correct the optical effect
+### Classification conditions
 
-Appearance of a method loading button after loading data to redo a past analysis.
+- NAD if jump is lower than X (in PN): force condition to classify non-adhesive curves
+- AD if position is lower than X (in nm): distance condition to separate the membership from the tubes
+- AD if slope is lower than X (in pts): condition number of points to separate the membership of the tubes
+- Factor overcome noise (x STD): Number of times the standard deviation for the calculation of the characteristic points
+- Factor optical effect (x STD): Number of times the standard deviation to correct the optical effect
+
+A method loading button appears after loading data to redo a past analysis.
 
 ## Menu after launching the analysis
-Three possible options:
+
+There are three options:
+
 - Supervised: Allows you to switch to a new window with the display of curves and a supervisory menu
 - Unsupervised: Allows you to retrieve the output file of the automatic analysis
 - ...with graphs: Allows you to retrieve the output file of the automatic analysis completed with all the graphs
 
 If we choose supervised:
-## Graphic display window with supervision
+
+### Graphic display window with supervision
+
 Visualization of all curves as a function of time on the 3 axes and as a function of distance on the main_axis
 
 ### Supervision menu
+
 - Close supervision Panel: Possibility to close this menu for a more important visualization of the curves
 - Buttons to navigate between the curves. Can be operated with the left/right arrow keys
 - Button to save the output file with an indication that the supervision is stopped at this curve (treat_supervised column)
@@ -111,6 +139,7 @@ Visualization of all curves as a function of time on the 3 axes and as a functio
 - Pagination to determine our position in the whole analysis. Possibility to move with the 'Enter' key and the number of the curve
 
 ### Changes in points and fits
+
 In the supervision interface, you can modify the characteristic points and curve fits:
 Go to the force vs distance curve
 In the menu press Edit/Pick event
@@ -120,6 +149,7 @@ then click on the graph:
 - on the two extreme points for the fit
 
 ### Summary plot
+
 On the last curve, a yellow button appears at the bottom of the supervision table. This button displays a graphic summary window for the validation of the input data as well as the classification with respect to the thresholds.
 A toggle button in the upper right corner allows to switch from piecharts to scatter plots
 
@@ -129,21 +159,27 @@ A toggle button in the upper right corner allows to switch from piecharts to sca
 If adding functionality with docstring, update the documentation
 
 ## Update
+
 ```
 make html
 ```
 
 ## Visualization documentation
-Click on the Help button in the interface
-or 
+
+Click on the Help button in the interface or 
+
 ```
 firefox https://phpuech.github.io/user_doc.html
 ```
 
-## Explanation output file
-output file in the form of a table of 48 columns on the number of curves of the analysis (1 curve per line)
-columns
+## Output file format
+
+The output file is a `csv` file with 48 columns and 1 line per analyzed curve.
+Bellow is the description of each column.
+
+
 ### Important data from the analysis for post-processing
+
 - treat_supervised type=bool
     True if curve visualized otherwise False
 - automatic_type type=str
@@ -161,6 +197,7 @@ columns
 
 
 ### Data of the analysis parameters
+
 - model type=str
     model for the fit on "Press" segment chosen by the user for the analysis
 - Date type=str
@@ -208,6 +245,7 @@ columns
 
 
 ### Data calculated during the analysis
+
 - baseline_origin_press (N) type=float
     average of the first 1000 points of the "Press" segment on the data without correction
 - baseline_corrected_press (pN) type=float
@@ -248,6 +286,7 @@ columns
     coefficient of the contact loss slope between the ball and the cell due to the retraction effect of the cell with respect to the ball
 
 ### Data calculated if type of curves different from non-adhesive, infinite tube or rejected
+
 ![Image](./pictures/description_points.png)
 - point_transition_index type=int
     index of the break point of the tube (called transition point)
@@ -293,17 +332,20 @@ columns
     validation of the fit on the "Pull" segment. False by default because not validated
 
 
-## Add features
+## Adding features
+
 To add a feature, two options are possible: 
 - During the automatic analysis 
 - After analysis for post processing
 
-### In analysis
+### In the code
+
 We need to add a method to the curve object
 then call it in the "analyzed_curve" method of the curve object
 This method is called by the controller when the automatic analysis is launched
 
-### In interface
+### In the interface
+
 If we want to call an external post processing script: 
  - we create a method in the controller that loops on the dict_curve (dictionnare of curved object)
  - we adapt our add script so that it includes the data of the object
@@ -313,15 +355,18 @@ if we want to add a new feature after analysis but on the object *curve :
  - we create a widget that calls this method through the dict-curve of the controller
 
  ## Adapt input
+ 
  The input text file must have a global header, a calibration part, segment headers and data
 ![Image](./pictures/structure_file_text.png)
  
  If your data do not have a force (xsignal1, ysignal1, zsignal1), time (seriesTime) and distance column:
+ 
 - You will have to implement methods in the specific curve object of your data
 - modify the start of the analysis in the controller in the "create_dict_curves" method
 - adapt the supervision to the data to display
 
 
-## Prospect
-* Problem on some computers for the pick event of matplotlib
+## Future developments
+
+* Problem on some computers for the pick event of matplotlib (this should be an issue)
 
