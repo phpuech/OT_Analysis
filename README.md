@@ -7,19 +7,19 @@ OT_Analysis
 
 # Tool for managing the results of optical tweezers
 
-OT_Anlysis is a tool for extracting, analyzing and classifying data from optical tweezer experiments.
+OT_Analysis is a tool for extracting, analyzing and classifying data from optical tweezer experiments. In the actual state, it uses forces curves created by a Bruker/JPK Nanowizard II optical tweezers setup.
 
 # Journal Open Source Software
 
 For better visibility and recognition of the real significant contribution in the analysis of optical tweezers data,
-the tool was published in the open source software journal at the following address
+the tool was proposed as publication (under review) in the Journal of Open Source Software (https://joss.theoj.org/)
 
 
 # Installation
 
-## Install MiniConda && Create conda environment
+## Install Conda/MiniConda && Create conda environment
 
-We recommend to install conda and create a virtual environment to avoid library conflicts before you install OT_Analyis
+For an optimal ease of use, we recommend to install conda and create a virtual environment to avoid library conflicts before you install OT_Analyis.
 
 For Linux or Mac
 
@@ -76,39 +76,50 @@ python -m main
 
 # Quick start using OTAnalysis
 
-## 1. Run the software with `otanalysis` in a terminal
+## 1. Launch the software GUI by typing `otanalysis` in a terminal
 
-## 2. Check and adjust relevant parameters
+## 2. Check and adjust the relevant parameters for the analysis in the first GUI window
 
 ## Condition of the experiment
 
-- condition: Name of the antibody present on the beads during the experiment
-- drug: name of the drug used for the analysis if present
+- condition: came of the antibody present on the beads during the experiment, or any other keyword that can be used for latter data processing
+- drug: name of the drug used for the analysis,  if present, or any other keyword that can be used for latter data processing
 
 ## Fitting management
 
-Selection of the curve files to be analyzed either by selecting a directory or with the multiple selection of files
+First, one has to select the curve files to be analyzed, either by selecting a directory or with the multiple selection of files
 
-- model: The model used to fit the "Press" curves (linear or sphere)
-If sphere is selected, the physical parameters menu for the calculation of the Young's modulus will appear
+Then, the analysis choices that will be applied to all of them are selected : 
+
+- model: corresponds to the physical model used to fit the "Press" curves (at the moment, only linear spring or sphere ie. Hertz-like model)
+Note that if the sphere model is selected, the physical parameters menu for the calculation of the Young's modulus will appear, with suitable default values that can be user refined
 - eta: Poisson's ratio
-- bead radius: diameter of the bead used during the experiment
+- bead radius: radius of the bead used during the experiment (in µm)
 
 ### Management of curve anomalies
 
-Curve management parameters can be either "Incomplete" (no analysis is possible) or "Misaligned" (analysis runs with a warning)
-- pulling length min : minimum percentage of the length of the "Pull" segment to determine if the curve is rejected despite the presence of all the segments indicated in the header
-- Fmax epsilon: percentage of max force on the major axis to determine misalignment of the curve on the minor axes
+A first step will automatically detect if curves can be processed, following user set parameters. As such, some curves will be either "Incomplete" (no analysis is possible) or "Misaligned" (analysis runs but with a warning)
+
+- curves not having the right number of segments will be discarded since they do not contain any relevant information and correspond mainly to a stopped data collection by the user
+- pulling length min : sets the minimum percentage of the length of the "Pull" segment to determine if the curve is rejected despite the presence of all the segments indicated in the header. This corresponds to a curve that has been stopped during the acquisition by the user, but late in the experiment.
+- Fmax epsilon: since the trap is a 3D spring, if the bead and cell are misaligned, some force can "bleed-through" the main, experimental, motion axis to the others, which may complexify the data analysis. This parameter corresponds to the percentage of max force tolerated on the major axis (eg. x) to determine misalignment of the curve on the two secondary axes (eg. y, z).
 
 ### Classification conditions
 
-- NAD if jump is lower than X (in PN): force condition to classify non-adhesive curves
+The pulling part of the curve contains information about adhesion of the bead to the cell and the eventual pulling of membrane tubes. The present software allows to classify the valid curves (see above) as non adhesive (NAD), adhesive (AD) and tube pulling ones (TU). Moreover, if the tube is not ruptured at the end of the pulling segment, the information is registred for further use.
+
+Some thresholds have to be set to allow this classification :
+
+- NAD if jump is lower than X (in pN): force condition to classify non-adhesive curves
 - AD if position is lower than X (in nm): distance condition to separate the membership from the tubes
 - AD if slope is lower than X (in pts): condition number of points to separate the membership of the tubes
 - Factor overcome noise (x STD): Number of times the standard deviation for the calculation of the characteristic points
-- Factor optical effect (x STD): Number of times the standard deviation to correct the optical effect
 
-A method loading button appears after loading data to redo a past analysis.
+Note that due to the curvature of the cells we used (T cells, 10µm in diameter), some optical artifact may appear when the bead (here 1-2µm) comes close to them. This is observed ad a deformation of the baseline to positive or negative forces just before the contact of the two surfaces. To detect it, before giving the hand to the user to correct it if wanted, we set another threshold.
+
+- Factor optical effect (x STD): Number of times the standard deviation to correct the optical effect. 
+
+To ease the reuse of previously used analysis parameters, a method saving/loading buttonia avalaible.
 
 ## Menu after launching the analysis
 
