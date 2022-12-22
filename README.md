@@ -82,7 +82,7 @@ python -m main
 
 ## Condition of the experiment
 
-- condition: came of the antibody present on the beads during the experiment, or any other keyword that can be used for latter data processing
+- condition: name of the antibody present on the beads during the experiment, or any other keyword that can be used for latter data processing
 - drug: name of the drug used for the analysis,  if present, or any other keyword that can be used for latter data processing
 
 ## Fitting management
