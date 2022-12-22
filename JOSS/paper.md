@@ -51,8 +51,8 @@ pull membrane nano-tubes from gently adhered living lymphocytes
 tension of adherent cells [@diz-munoz_control:2010]. By varying the
 antibodies that are used to decorate the beads, we select the molecule
 type we specifically pull on, and we then explore the molecules which
-are characteristic of the immune synapse, that is one of the key
-organisational structures that has profound implications in T cell
+are characteristic of the immune synapse, which is one of the key
+organisational structures that have profound implications in T cell
 recognition and action [@baldari_immune:2017].
 
 Using this approach, we probe not only the forces of recognition of the
@@ -74,10 +74,10 @@ the pulling of a tube (d) and its rupture (e), back to the situation of
 Adapted from [@manca_membrane:2022]](dessin2.png){#fig:dessin
 width="\\linewidth"}
 
-The experimentally obtained data consists in force signal as a function
+The experimentally obtained data consists of force signal as a function
 of time (among other parameters), in the three directions of space,
 obtained in large quantities (at least 10 per cell / bead couple, and up
-to 20 couples tested per sample), containing rich and detailled features
+to 20 couples tested per sample), containing rich and detailed features
 that can relate to molecular and/or cellular mechanics that our model
 explores. It is therefore needed to standardize and semi-automatize data
 analysis to help the experimentalist, often a biologist, to extract
@@ -93,13 +93,13 @@ text and images the data, it is closed source and, as such, cannot
 receive implementations of novel functions, depending on the
 experimentalist needs.
 
-In particular, in regard to the above described application, the user
-would have to interact a lot via mouse-clicks and find alternative use
+In particular, regarding the above described application, the user
+would have to interact a lot via mouse clicks and find an alternative use
 of preexisting data processing functions to perform the (time) expensive
 analysis required. This may introduce bias in the data, which may impair
 user-to-user data comparison.
 
-Aside, almost none, if any, open source software has been proposed to
+Aside, almost none, if any, open-source software has been proposed to
 the community eg. via GitHub or GitLab for quantifying optical tweezers
 experiments with living cells, while some have been proposed for Atomic
 Force Microscopy force mode [@muller_nanite:2019], with a modular
@@ -121,29 +121,29 @@ tweezers\", on GitHub :
 
 ![Snapshots of OT-Analysis software. A : Starting window where data can
 be selected and parameters for the analysis set. B : Setting the choice
-of analysis, from fully automated to user supervised. C : Main window of
+of analysis, from fully automated to user-supervised. C : The main window of
 supervision showing the raw data in the three directions of space, and
 the results of the pre-analysis, allowing the user to amend the analysis
 if needed.](dessin.png){#fig:dessin width="\\linewidth"}
 
-Of note, OT setups usually allow allows to quantify the forces in the
+Of note, OT setups usually allow to quantify the forces in the
 three directions of space. Thus lateral forces resulting from small
 geometric mis-alignments between a given bead and the cell can be
 probed. As a consequence, our software has been designed to allow the
-direct comparison between these three directions in order to select
+direct comparison between these three directions to select
 curves where the force is detected mainly in one single direction
 corresponding to the one selected during the experiment. Aside, we
-introduced refined baseline corrections for forces which may be caused,
+introduced refined baseline corrections for forces that may be caused,
 for T cells, by the deformation of the trap close to contact. We
 quantify the cell mechanics, when pushing the bead on the cell, and also
 cell adhesion or tube pulling when separating them. Due to the large
 number of curves that are typically produced, we implemented data
-processing by subsets, in order to be able to use regular or old
+processing by subsets, to be able to use regular or old
 computers to be able to distribute it to our students.
 
 We based our software on command line processing functions that we
-developed in the lab, and implemented a user friendly, modular, Qt based
-GUI which is more than needed when a non code-savy scientist wants to
+developed in the lab, and implemented a user-friendly, modular, Qt based
+GUI which is more than needed when a non-code-savy scientist wants to
 process complex biological data.
 
 Our resulting software, as such, can serve as a basis for adding new
