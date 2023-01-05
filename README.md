@@ -189,7 +189,9 @@ firefox https://phpuech.github.io/user_doc.html
 ## Output file format
 
 The output data is contained in a `csv` file with 48 columns and 1 line per analyzed curve.
-Bellow is the rapid description of each column. Note that this description will soon be made more clear for a non-familiar user.
+Bellow is the rapid description of each column ; content should appear to the user trivial in the choices of naming. 
+
+Note : this description will soon be made more clear for a non-familiar user.
 
 
 ### Important data from the analysis for post-processing
@@ -197,79 +199,99 @@ Bellow is the rapid description of each column. Note that this description will 
 - treat_supervised type=bool
     True if curve is visualized otherwise False
 - automatic_type type=str
-    type determined by the automatic analysis
+    type of curve event determined by the automatic analysis (NAd, AD, TU for non adhesive, adhesive, tube resp.)
 - type type=str
-    type given to the curve with the supervisor menu. If there is no supervision then the same as the 'automatic_type' column.
+    modified type given to the curve using the supervision menu. If there is no supervision then the value is the same as the 'automatic_type' column.
 - automatic_AL type=str
-    "No" if the curve is misaligned according to the automatic threshold otherwise "Yes"
+    x,y,z alignement of the curves. The value is "No" if the curve is misaligned according to the automatic threshold.
 - AL: str
-    Readjustment through supervision. If no supervision, then same as "automatic_AL"
+    x,y,z alignement of the curves : readjustment through supervision. If no supervision, then the value is the same as "automatic_AL"
 - automatic_AL_axe type=list
-    secondary axis affected by curve misalignment and its sign to know the direction of the misalignment with respect to the direction of the main axis
+    secondary axis along which misalignment occurs, and its sign to know the direction of the misalignment with respect to the direction of the main axis (see below for the conventions for the signs)
 - optical_state type=str
-    optical correction applied (No_correction, Auto_correction, Manual_correction)
+    status of the correction for the optical artifact (No_correction, Auto_correction, Manual_correction)
 
 
-### Data of the analysis parameters
+### Analysis parameters saved for data post processing
+
+The following are setting some of the parameters for the analysis
 
 - model type=str
     model for the fit on "Press" segment chosen by the user for the analysis
-- Date type=str
-    date of creation of the curve file
-- Hour type=str
-    time of creation of the curve file
-- condition type=str
-    condition applied to the analysis set (often antibodies on the bead)
-- drug type=str
-    drug put in the medium for analysis (can be used to add a second condition)
 - tolerance type=float
-    noise tolerance for the baseline (xstd)
-- bead type=str
-    number of the bead used for the curve
-- cell type=str
-    number of the cell used for the curve
-- couple type=str
-    couple bead number and cell number
+    noise tolerance for the baseline (as x STD of baseline)
 
-### Theoretical data present in the headers of the files
+The following one identify the experiments and can be used to pool them for stats or plotting
+    
+- Date type=str
+    date of creation of the curve file (day of the experiment)
+- Hour type=str
+    time of creation of the curve file (time of the experiment)
+    
+The following identify the conditions of the experiments
+    
+- condition type=str
+    condition applied to the analysis set (ex : antibodies decorating the bead)
+- drug type=str
+    name of drug that is used to perturb the system, if used (can be used to add a second condition, ex : surface treatment for cell attachment)
+    
+The following ones can be used for pooling the data per bead, per cell, per couple...
+
+- bead type=str
+    number of the bead used during measurements
+- cell type=str
+    number of the cell used during measurements
+- couple type=str
+    couple bead number and cell number, as an identifier
+
+### Data coming from the OT GUI and present in the headers of the files
+
+They represent desired or theoretical values, or positional data recovered from motion angles present in the headers (see JPK OT documentation)
+
 - main_axis type=str
-    main axis of the experiment and the direction of approach of the cell with respect to the bead. Here are our choices for orientations and signs.
+    main axis of the experiment and the direction of approach of the cell with respect to the bead which is here is immobile, at the center of the trapping zone, for the sake of simplicity and fidelity of the measurements. 
+    
+Here are our choices for orientations and signs.
         +X : the cell approaches from the right
         -X : the cell approaches from the left
         +Y : the cell comes from the top
         -Y : the cell comes from the bottom
+        
+        
 - stiffness type=float
     value of the spring stiffness (calibrated by the software prior to experiment) to correct the distance values
 - theorical_contact_force (N) type=float
-    theoretical contact force between the beadand the cell required by the user before starting the experiment
+    theoretical contact force between the beadand the cell required by the user before starting the experiment, from baseline
 - theorical_distance_Press (m) type=float
-    theoretical length of the "Press" segment
+    theoretical maximal length of the "Press" segment. It won't be reached if the stop condition is made to be the max force.
 - theorical_speed_Press (m/s) type=float
     theoretical speed of the "Press" segment
 - theorical_freq_Press (Hz) type=float
-    theoretical frequency of the "Press" segment
+    measurement frequency of the "Press" segment
 - time_segment_pause_Wait1 (s) type=float
-    pause time of the "Wait" segment (often 0s)
+    pause time of the "Wait" segment (can be 0s if no waiting time is set)
 - theorical_distance_Pull (m) type=float
-    theoretical length of the "Pull" segment
+    theoretical length of the "Pull" segment. This max distance will be reached and will mark the end of the curve, even if the cell and bead are not fully detached (see infinite tubes)
 - theorical_speed_Pull (m/s) type=float
     theoretical speed of the "Pull" segment
 - theorical_freq_Pull (Hz) type=float
-    theoretical frequency of the "Pull" segment
+    measurement frequency of the "Pull" segment
 
 
 ### Data calculated during the analysis
 
+Note : some of the points which are detected and stored in the following variables can be seen on the documentation images.
+
 - baseline_origin_press (N) type=float
-    average of the first 1000 points of the "Press" segment on the data without correction
+    average of the first 1000 points of the "Press" segment on the data, without correction
 - baseline_corrected_press (pN) type=float
-    average of the first 1000 points of the "Press" segment on the data corrected to bring the baseline centered on 0
+    average of the first 1000 points of the "Press" segment on the data corrected to bring the baseline centered on 0, which should then be close to zero
 - std_origin_press (N) type=float
     standard deviation of the first 1000 points to define the noise rate of the curve (on the data without correction)
 - std_corrected_press (pN) type=float
-    standard deviation of the first 1000 points to define the noise rate of the curve (on the data correction)
+    standard deviation of the first 1000 points to define the noise rate of the curve (on the data correction). Should be the same as above.
 - slope (pN/nm) type=float
-    calculation of the force slope for the "Press" segment
+    calculation of the force slope in the contact zone for the "Press" segment
 - error (pN/nm) type=float
     calculates the error of the force slope for the "Press" segment
 - contact_point_index type=int
@@ -299,7 +321,11 @@ Bellow is the rapid description of each column. Note that this description will 
 - Pente (pN/nm) type=float
     coefficient of the contact loss slope between the beadand the cell due to the retraction effect of the cell with respect to the ball
 
-### Data calculated if type of curves different from non-adhesive, infinite tube or rejected
+### Data calculated if the type of curves is measured to be different from rejected, non-adhesive or infinite tube
+
+Note 1 : an infinite tube is a detected event which has the characteristics of a tube, but still exists when the max pulling length is reached. In short, the final force is not back to the original baseline, which is the case for a non adhesion, an adhesion or a tube of "finite" lenght (lenght < max pulling lenght).
+
+Note 2 : some of the points which are detected and stored in the following variables can be seen on the documentation images.
 
 ![Image](./pictures/description_points.png)
 - point_transition_index type=int
@@ -338,12 +364,12 @@ Bellow is the rapid description of each column. Note that this description will 
 - slope_fitted_classification_return_endline type=float
     slope of the linear fit between the transition point and the baseline return point
 
-### Boolean validation of the fits
+### Boolean corresponding to the validation of the fits
 - valid_fit_press type=bool
-    validation of the fit on the "Press" segment. False by default because not validated
+    validation of the fit on the "Press" segment. False by default.
 
 - valid_fit_pull type=bool
-    validation of the fit on the "Pull" segment. False by default because not validated
+    validation of the fit on the "Pull" segment. False by default.
 
 
 ## Adding features
@@ -365,14 +391,16 @@ If one wants to call an external post processing script:
  - second,  adapt our add script so that it includes the data of the object
  - third, create a widget in the interface that calls the method of the view's controller attribute
 
-if we want to add a new feature after analysis but on the object *curve :
- - we add a method to curve
- - we create a widget that calls this method through the dict-curve of the controller
+if one wants to add a new feature after analysis but on the object *curve :
+ - add a method to the curve object
+ - create a widget that calls this method through the dict-curve of the controller
 
 ## Adapt input to other raw data formats (eg. other tweezers acquisitions or set-ups)
  
- The input text file must have a global header, a calibration part, segment headers and data
+ The input text file must have a global header, a calibration part, segment headers and data, which for us is set by the JPK Instrument / Bruker standarts.
 ![Image](./pictures/structure_file_text.png)
+ 
+ In short, to adapt to different input, one has to either rewrite the I/O part of the code, or write a converter that modifies the input to fit the present I/O.
  
  If the data do not have a force (xsignal1, ysignal1, zsignal1), time (seriesTime) and distance column:
  
@@ -383,5 +411,5 @@ if we want to add a new feature after analysis but on the object *curve :
 
 ## Future developments
 
-* We noted on some computers issues with the "pick event" function of matplotlib, without finding easy solutions to fix that. Note that this won't prevent the use of the main functionnalities of the present software.
+* We noted on some computers issues with the "pick event" function of matplotlib, without finding the origin of the bug or any easy solutions to fix that for the moment. Note that this won't prevent the use of the main functionnalities of the present software.
 
