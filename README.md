@@ -1,5 +1,3 @@
-![Python 3.8.5](https://img.shields.io/badge/Python-3.8.5-blue.svg)
-![PyQt 5.15.0](https://img.shields.io/badge/PyQt-5.15.0-green.svg)
 ![License GPL](https://img.shields.io/badge/GNU-GPL3-red.svg)
 
 OT_Analysis
