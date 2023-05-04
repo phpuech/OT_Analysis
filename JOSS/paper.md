@@ -185,8 +185,9 @@ with the main files.
 width="\\linewidth"}
 
 For a description of the functions and their arguments,
-please refer to the online documentation provided in the link below (in the file user_documentation.md).
-https://github.com/phpuech/OT_Analysis.
+please refer to the online documentation provided in the link below :
+
+https://otanalysis.readthedocs.io/en/latest/otanalysis.html?highlight=otanalysis
 
 
 # Acknowledgements
