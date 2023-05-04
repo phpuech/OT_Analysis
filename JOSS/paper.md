@@ -151,30 +151,19 @@ features in the field of force measurements by optical tweezers.
 
 # Example usage
 
-The prototypical experiments consist in using optical tweezers to contact a cell with a trapped protein decorated bead, 
-trying to obtain some membrane tube pulling events upon separation. The first use of the
-present software is to ensure that such a pulling is specific to the protein decoration
-used. In this case, two sets of data curves (force vs. time) are obtained using an adhesive protein
-and a control protein (in our case an antibody specific for a surface protein of the cell and
-a second antibody, isotype to the first one, but not recognizing any surface protein a priori).
+The prototypical experiments consist in using optical tweezers to contact a cell with a trapped bead decorated with protein  , in order to obtain some membrane tube pulling events upon separation. The first use of the present software is to ensure that such a pulling is specific to the protein decoration used. In this case, two sets of data curves (force vs. time) are obtained using an adhesive protein and a control protein (in our case an antibody specific for a surface protein of the cell and a second antibody, isotype to the first one, but not recognizing any surface protein a priori).
 
-The software allows, after an automated  preprocessing step, a reinspection of the data to amend the type selection and potentially refine, on a 
-case per case basis, the data processing, in particular to  select the different adapted thresholds for
-detecting the adhesion and potential tubes (eg. duration and force amplitude), the threshold for optical artifacts, ...
-in order to :
+The software allows, after an automated pre-processing step, a inspection of the data by the user in order to amend the type selection and potentially refine, on a case per case basis, the data processing. The user can adjust the  thresholds for detecting the adhesion and potential tubes (eg. duration and force amplitude), the threshold for optical artifacts, ... . The outcome will provide graphical representations to:
+- evaluate the fraction of the positive events (adhesion + tubes) in the population of forces curves 
+  - while rejecting the curves that are used for aligning the two substrates 
+  - while excluding the curves where optical artifacts can be detected 
+  - while removing from the analysis the curves that are "bad" (eg. when the bead is lost or when a second bead enters the trap) 
+- measure the duration and force magnitude of the positive events 
+- measure the amount of tubes in the overall population.
 
-- evaluate the fraction of the positive events (adhesion + tubes) in the population of forces curves
-    - while rejecting the curves that are used for aligning the two substrates
-    - while excluding the curves where optical artifacts can be detected
-    - while removing from the analysis the curves that are "bad" (eg. when the bead is lost or when a second bead enters the trap)
-- measure the duration and force magnitude of the positive events
-- quantitate the amount of tubes in the overall population
+The output file can then be reloaded using ad-hoc procedures (eg. in Python) to merge or sort the data, plot, perform statistical analysis,... on relevant biophysical parameters described in https://github.com/phpuech/OT_Analysis.
 
-The output file can then be reloaded using ad-hoc procedures (eg. in Python) to merge or sort the data, plot, perform statistical analysis,... on relevant 
-biophysical parameters described in https://github.com/phpuech/OT_Analysis. 
-
-The results of the analysis can then be used to feedback on the experimental parameters (contact force, contact duration, molecular densities 
-on the beads, bead size,...) and / or compare different molecules in order to examine a biological effect (for this last point, see [@manca_membrane:2022])
+The results of the analysis can then be used to feedback on the experimental parameters (contact force, contact duration, molecular densities on the beads, bead size,...) and / or compare different molecules in order to examine a biological effect (for this last point, see [@manca_membrane:2022])
 
 # Functionality documentation
 
