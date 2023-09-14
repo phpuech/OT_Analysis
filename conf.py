@@ -25,9 +25,9 @@ copyright = '2022, Thierry GALLIANO, Pierre-Henri PUECH, Laurent LIMOZIN, Guilla
 author = 'Thierry GALLIANO, Pierre-Henri PUECH, Laurent LIMOZIN, Guillaume GAY (LAI, Bio Imaging)'
 
 # The short X.Y version
-version = '0.2'
+version = '0.2.1'
 # The full version, including alpha/beta/rc tags
-release = '0.2.0'
+release = '0.2.1'
 
 
 # -- General configuration ---------------------------------------------------
