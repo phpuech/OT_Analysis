@@ -71,7 +71,7 @@ formed under a controlled level of force and maintained for a given time
 ; (c) the cell is displaced away from the bead, eventually resulting in
 the pulling of a tube (d) and its rupture (e), back to the situation of
 (a). B : Resulting Force vs.Time curve with the indicated events.
-Adapted from [@manca_membrane:2022]](dessin2.png){#fig:dessin
+Adapted from [@manca_membrane:2022]](dessin2.png){#fig:dessin2
 width="\\linewidth"}
 
 The experimentally obtained data consists of force signal as a function
