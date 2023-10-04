@@ -61,7 +61,7 @@ extracellular bridges, we probe the cytosolic link of the probed
 molecule to the cytoskeleton. Such a link has been proposed to be
 instrumental in the way T cells can apply or feel forces through the
 molecule. A theoretical model has been built and will be reported in a
-dedicated article [@manca_membrane:2022]. Aside, we will demonstrate the
+dedicated article [@manca_membrane:2023]. Aside, we will demonstrate the
 application of the software on full data.
 
 ![Schematics of the experiment. A : Sequence of events (a) antibody
@@ -71,7 +71,7 @@ formed under a controlled level of force and maintained for a given time
 ; (c) the cell is displaced away from the bead, eventually resulting in
 the pulling of a tube (d) and its rupture (e), back to the situation of
 (a). B : Resulting Force vs.Time curve with the indicated events.
-Adapted from [@manca_membrane:2022]](dessin2.png){#fig:dessin2
+Adapted from [@manca_membrane:2023]](dessin2.png){#fig:dessin2
 width="\\linewidth"}
 
 The experimentally obtained data consists of force signal as a function
@@ -171,7 +171,7 @@ The outcome will provide graphical representations to:
 
 The output file can then be reloaded using ad-hoc procedures (e.g. in Python) to merge or sort the data, plot, perform statistical analysis on relevant biophysical parameters described in https://github.com/phpuech/OT_Analysis.
 
-The results of the analysis can then be used to feedback on the experimental parameters (contact force, contact duration, molecular densities on the beads, bead size) and / or compare different molecules in order to examine a biological effect (for this last point, see [@manca_membrane:2022]).
+The results of the analysis can then be used to feedback on the experimental parameters (contact force, contact duration, molecular densities on the beads, bead size) and / or compare different molecules in order to examine a biological effect (for this last point, see [@manca_membrane:2023]).
 
 # Functionality documentation
 
