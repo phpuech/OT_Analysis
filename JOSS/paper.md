@@ -60,7 +60,7 @@ given antibody to its target molecule, but also, by using strong
 extracellular bridges, we probe the cytosolic link of the probed
 molecule to the cytoskeleton. Such a link has been proposed to be
 instrumental in the way T cells can apply or feel forces through the
-molecule. A theoretical model has been built and will be reported in a
+molecule. A theoretical model has been built and has been recently reported in a
 dedicated article [@manca_membrane:2023]. Furthermore, we will demonstrate the
 application of the software on full data.
 
